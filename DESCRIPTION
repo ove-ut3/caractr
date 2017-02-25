@@ -1,7 +1,7 @@
 Package: caractr
 Title: Fonctions autour de la manipulation de chaines de caracteres
 Version: 0.1
-Authors@R: person("SIES", "Departement des outils d'aide a la decision", email = "ce.siesc3@education.gouv.fr", role = c("aut", "cre"))
+Authors@R: person("Stéphane Le Hénanff", "Stéphane Le Hénanff", email = "github@le-henanff.fr", role = c("aut", "cre"))
 Description: Fonctions autour de la manipulation chaines de caracteres : simplification de chaine, mise a jour de la casse et des accents.
 Depends:
     R (>= 3.2.5)
