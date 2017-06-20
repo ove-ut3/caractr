@@ -22,4 +22,3 @@ Utilisé conjointement avec la fonction \code{conv_pv_vide()} pour créer les ch
 caractr::conv_ods_na_vide(c("Université de Franche-Comté", NA_character_))
 
 }
-

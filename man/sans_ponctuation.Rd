@@ -22,4 +22,3 @@ caractr::sans_ponctuation("Université Paris-Est Créteil Val-de-Marne")
 caractr::sans_ponctuation("Université Paris-Est Créteil Val-de-Marne", remplacement = "_")
 
 }
-

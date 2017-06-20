@@ -19,4 +19,3 @@ Normaliser une chaine de caractères (utilisation pour un nom de champ dans une 
 caractr::normaliser_char(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
 
 }
-

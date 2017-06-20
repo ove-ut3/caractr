@@ -22,4 +22,3 @@ Trouvé sur : \url{http://stackoverflow.com/questions/20495598/replace-accented-
 caractr::sans_accent("Université de Franche-Comté")
 
 }
-

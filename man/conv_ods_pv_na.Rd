@@ -22,4 +22,3 @@ Utilisé conjointement avec la fonction \code{conv_na_vide()} pour créer les ch
 conv_ods_pv_na(c(";;;", ";CNRS;;"))
 
 }
-

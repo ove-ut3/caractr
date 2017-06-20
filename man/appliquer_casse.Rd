@@ -22,4 +22,3 @@ Appliquer la casse d'une première chaine de caractères vers une seconde chaine
 caractr::appliquer_casse(c("test1", "test2"), libelle_casse = c("aaAaa", "bBBbb"))
 
 }
-

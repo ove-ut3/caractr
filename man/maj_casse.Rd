@@ -31,4 +31,3 @@ caractr::maj_casse(c("GENETICS AND IMMUNOLOGY OF PARASITIC DISEASES",
   "RESEARCH INSTITUTE  IN HEALTH"), code_langue = "en")
 
 }
-

@@ -36,4 +36,3 @@ caractr::prx_mots_vides(selection = c("au", "aux"))
 caractr::prx_mots_vides(langue = "en")
 
 }
-

@@ -19,4 +19,3 @@ Mettre une capitale à la première lettre d'une chaine de caractères.
 caractr::str_capitaliser("université de Caen Normandie")
 
 }
-

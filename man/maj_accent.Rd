@@ -26,4 +26,3 @@ caractr::maj_accent("Ecole superieure de commerce de Troyes")
 caractr::maj_accent("Universite de Franche-Comte")
 
 }
-

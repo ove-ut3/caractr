@@ -23,4 +23,3 @@ paste("chaine1", NA_character_, "chaine2")
 caractr::paste_na("chaine1", NA_character_, "chaine2")
 
 }
-
