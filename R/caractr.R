@@ -332,3 +332,25 @@ appliquer_casse <- function(libelle, libelle_casse) {
 
   return(appliquer_casse)
 }
+
+#' Normaliser des chaines de caractere en tant que nom de fichier
+#'
+#' Normaliser des chaines de caractère en tant que nom de fichier.
+#'
+#' @param char Un vecteur de type caractère.
+#'
+#' @return Un vecteur de type caractère prêts à être utilisés en tant que nom de fichier.
+#'
+#' @examples
+#'
+#' @export
+str_fichier <- function(char) {
+
+  str_fichier <- char %>%
+    stringr::str_replace_all("(\\w)([\\<\\>:|\\?\\*/\\\\])", "\\1 \\2") %>%
+    stringr::str_replace_all("[\\<\\>:|\\?\\*/\\\\]", " - ") %>%
+    stringr::str_replace_all(" +", " ")
+
+  return(str_fichier)
+
+}
