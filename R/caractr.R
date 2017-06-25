@@ -24,7 +24,7 @@ sans_accent <- function(libelle) {
   if (length(position_na) >= 1) {
     sans_accent[position_na] <- iconv(libelle[position_na],
                                       from = "Windows-1252",
-                                      to='ASCII//TRANSLIT')
+                                      to = "ASCII//TRANSLIT")
   }
 
   return(sans_accent)
