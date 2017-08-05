@@ -8,7 +8,7 @@
 #'
 #' @return Une expression régulière sous forme de chaine de caractères.\cr
 #'
-#' Jeu de données source : \code{caractr::data_mot_vide}.\cr
+#' Jeu de données source : \code{caractr::data_mots_vides}.\cr
 #' Il est créé à partir de la table "Mot_vide" de la base Access "Tables_ref.accdb" (projet "Text mining").
 #'
 #' @examples
@@ -27,7 +27,7 @@
 #' @export
 prx_mots_vides <- function(langue = "fr", excepte = NULL, selection = NULL){
 
-  prx_mots_vides <- dplyr::filter(caractr::data_mot_vide, code_langue == langue) %>%
+  prx_mots_vides <- dplyr::filter(caractr::data_mots_vides, code_langue == langue) %>%
     .[["mot_vide"]]
 
   if (!is.null(excepte)) {

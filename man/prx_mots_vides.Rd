@@ -16,7 +16,7 @@ prx_mots_vides(langue = "fr", excepte = NULL, selection = NULL)
 \value{
 Une expression régulière sous forme de chaine de caractères.\cr
 
-Jeu de données source : \code{caractr::data_mot_vide}.\cr
+Jeu de données source : \code{caractr::data_mots_vides}.\cr
 Il est créé à partir de la table "Mot_vide" de la base Access "Tables_ref.accdb" (projet "Text mining").
 }
 \description{
