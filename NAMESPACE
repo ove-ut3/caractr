@@ -3,6 +3,7 @@
 export(appliquer_casse)
 export(conv_ods_na_vide)
 export(conv_ods_pv_na)
+export(data)
 export(maj_accent)
 export(maj_casse)
 export(nettoyer_numero_telephone)
