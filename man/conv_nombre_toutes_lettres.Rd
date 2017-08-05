@@ -4,10 +4,14 @@
 \alias{conv_nombre_toutes_lettres}
 \title{conv_nombre_toutes_lettres}
 \usage{
-conv_nombre_toutes_lettres(nombre)
+conv_nombre_toutes_lettres(nombre, type = "lettre", langue = "fr")
 }
 \arguments{
-\item{nombre.}{}
+\item{nombre}{\dots}
+
+\item{type}{\dots}
+
+\item{langue}{\dots}
 }
 \description{
 conv_nombre_toutes_lettres
