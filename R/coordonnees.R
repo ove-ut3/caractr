@@ -15,6 +15,7 @@ nettoyer_numero_telephone <- function(numero) {
   nettoyer_numero_telephone <- tibble::tibble(numero) %>%
     dplyr::mutate(numero = stringr::str_replace_all(numero, "\n", " "),
                   numero2 = stringr::str_replace_all(numero, "[^\\d]", ""),
+                  numero2 = stringr::str_replace_all(numero2, "^(00)?33(\\d{9})", "0\\2"),
                   numero2 = ifelse(nchar(numero2) == 9, paste0("0", numero2), numero2),
                   numero2 = ifelse(nchar(numero2) == 10, stringr::str_replace(numero2, "(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "\\1 \\2 \\3 \\4 \\5"),
                             numero))
