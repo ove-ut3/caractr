@@ -1,6 +1,6 @@
 #' Nettoyer des numeros de telephone
 #'
-#' Nettoyer des numéros de téléphone.\cr
+#' Nettoyer des numéros de téléphone.
 #'
 #' @param numero Un vecteur de numéros.
 #'

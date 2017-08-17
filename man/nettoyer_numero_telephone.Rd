@@ -13,7 +13,7 @@ nettoyer_numero_telephone(numero)
 Un vecteur de numéros nettoyés.
 }
 \description{
-Nettoyer des numéros de téléphone.\cr
+Nettoyer des numéros de téléphone.
 }
 \examples{
 caractr::nettoyer_numero_telephone("06.00.00.00.00")
