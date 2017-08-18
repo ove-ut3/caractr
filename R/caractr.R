@@ -191,7 +191,6 @@ paste2 <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
   } else {
     if (na.rm == TRUE) {
       paste.na <- function(x, sep) {
-        x <- gsub("^\\s+|\\s+$", "", x)
         ret <- paste(na.omit(x), collapse = sep)
         is.na(ret) <- ret == ""
         return(ret)
