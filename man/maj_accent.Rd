@@ -12,7 +12,7 @@ maj_accent(libelle)
 \value{
 Un vecteur de type caractère dont les mots sont accentués.
 
-Jeu de données source : \code{caractr::data_mot_accent}.\cr
+Jeu de données source : \code{caractr::mot_accent}.\cr
 Il est créé à partir d'une table source SAS (projet "Text mining").\cr
 }
 \description{

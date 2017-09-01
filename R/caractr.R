@@ -243,7 +243,7 @@ paste_na <- function(..., sep = " ", collapse = NULL) {
 #'
 #' @return Un vecteur de type caractère dont les mots sont accentués.
 #'
-#' Jeu de données source : \code{caractr::data_mot_accent}.\cr
+#' Jeu de données source : \code{caractr::mot_accent}.\cr
 #' Il est créé à partir d'une table source SAS (projet "Text mining").\cr
 #'
 #' @examples
@@ -262,12 +262,12 @@ maj_accent <- function(libelle) {
     stop("Le premier paramètre doit être de type character", call. = FALSE)
   }
 
-  maj_accent <- dplyr::data_frame(libelle) %>%
+  maj_accent <- tibble::tibble(libelle) %>%
     dplyr::mutate(cle = row_number(),
                   mot = libelle) %>%
     tidyr::separate_rows(mot, sep = "\\b") %>%
     dplyr::mutate(mot_lc = tolower(mot)) %>%
-    dplyr::left_join(caractr::data_mot_accent, by = c("mot_lc" = "sans_accent")) %>%
+    dplyr::left_join(caractr::mot_accent, by = c("mot_lc" = "sans_accent")) %>%
     dplyr::mutate(mot_accent = ifelse(!is.na(avec_accent), avec_accent, mot_lc),
                   mot_accent = caractr::appliquer_casse(mot_accent, mot)) %>%
     dplyr::group_by(cle, libelle) %>%
@@ -306,7 +306,7 @@ appliquer_casse <- function(libelle, libelle_casse) {
     stop("Les chaines de caractères des deux paramètres doivent être toutes de même longueur deux à deux", call. = FALSE)
   }
 
-  appliquer_casse <- dplyr::data_frame(libelle, libelle_casse) %>%
+  appliquer_casse <- tibble::tibble(libelle, libelle_casse) %>%
     dplyr::mutate(libelle = stringr::str_split(libelle, ""),
                   libelle_casse = stringr::str_split(libelle_casse, "")) %>%
     tidyr::unnest(.id = "num_libelle")
@@ -324,7 +324,7 @@ appliquer_casse <- function(libelle, libelle_casse) {
     dplyr::group_by(num_libelle) %>%
     dplyr::summarise(libelle = paste0(libelle, collapse = "")) %>%
     dplyr::ungroup() %>%
-    dplyr::right_join(dplyr::data_frame(num_libelle = 1:length(libelle)),
+    dplyr::right_join(tibble::tibble(num_libelle = 1:length(libelle)),
                      by = "num_libelle") %>%
     dplyr::mutate(libelle = caractr::conv_ods_na_vide(libelle)) %>%
     .[["libelle"]]
