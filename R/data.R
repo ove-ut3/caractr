@@ -2,7 +2,7 @@
 #'
 #' @export
 #' @keywords internal
-data <- function() {
+generer_data <- function() {
 
   mots_vides <- importr::importer_table_access("mots_vides", paste0(racine_packages, "caractr/Tables_ref.accdb"))
   save("mots_vides", file = paste0(racine_packages, "caractr/data/mots_vides.RData"))
