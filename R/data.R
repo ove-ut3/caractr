@@ -8,7 +8,8 @@ data <- function() {
   save("mots_vides", file = paste0(racine_packages, "caractr/data/mots_vides.RData"))
 
   mots_lettres <- importr::importer_table_access("mots_lettres", paste0(racine_packages, "caractr/data/Tables_ref.accdb")) %>%
-    dplyr::mutate(ieme = paste0(lettres, "ième"),
+    dplyr::mutate(lettre_f = ifelse(lettre == "un", "une", lettre),
+                  ieme = paste0(lettre, "ième"),
                   ieme = ifelse(nombre == 0, NA_character_, ieme),
                   ieme = ifelse(nombre == 1, "premier", ieme),
                   ieme = stringr::str_replace(ieme, "eième$", "ième"),
