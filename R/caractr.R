@@ -353,3 +353,22 @@ str_fichier <- function(char) {
   return(str_fichier)
 
 }
+
+#' Passage en libelle de pourcentage d'une valeur numerique
+#'
+#' Passage en libellé de pourcentage d'une valeur numérique.
+#'
+#' @param valeur Un vecteur de valeurs numérique.
+#'
+#' @return Un vecteur de libellés de pourcentages.
+#'
+#' @examples
+#' caractr::lib_pourcentage(0.1)
+#'
+#' @export
+lib_pourcentage <- function(valeur, decimales = 1) {
+
+  lib_pourcentage <- paste0(trimws(format(round(valeur * 100, decimales))), "%")
+
+  return(lib_pourcentage)
+}
