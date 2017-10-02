@@ -368,7 +368,7 @@ str_fichier <- function(char) {
 #' @export
 lib_pourcentage <- function(valeur, decimales = 1) {
 
-  lib_pourcentage <- paste0(trimws(format(round(valeur * 100, decimales))), "%")
+  lib_pourcentage <- caractr::paste_na(round(valeur * 100, decimales), "%")
 
   return(lib_pourcentage)
 }
