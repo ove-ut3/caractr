@@ -372,3 +372,36 @@ lib_pourcentage <- function(valeur, decimales = 1) {
 
   return(lib_pourcentage)
 }
+
+#' Decoupage d'une chaine de caracteres sur plusieurs lignes
+#'
+#' Découpage d'une chaine de caractères sur plusieurs lignes.
+#'
+#' @param char Un vecteur de chaines de caractères.
+#' @param n_char_max Un nombre de caractères maximum par ligne.
+#' @param collapse Le séparateur pour le saut de ligne.
+#'
+#' @return Un vecteur de chaines de caractères.
+#'
+#' @examples
+#' caractr::str_saut_ligne(c("Une très très très très très très longue chaine de caractère", "test"), nchar = 40)
+#'
+#' @export
+str_saut_ligne <- function(char, n_char_max, collapse = "\n") {
+
+  str_saut_ligne <- tibble::tibble(char = char) %>%
+    dplyr::mutate(char = stringr::str_split(char, " ")) %>%
+    tidyr::unnest(.id = "id") %>%
+    dplyr::group_by(id) %>%
+    dplyr::mutate(n_char = (nchar(char) + 1) %>%
+                    cumsum()) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(ligne = cut(n_char, seq.int(0, max(dplyr::pull(., n_char)) +  n_char_max - max(dplyr::pull(., n_char)) %% n_char_max  , by = n_char_max))) %>%
+    dplyr::group_by(id, ligne) %>%
+    dplyr::summarise(char = paste(char, collapse = " ")) %>%
+    dplyr::group_by(id) %>%
+    dplyr::summarise(char = paste(char, collapse = collapse)) %>%
+    dplyr::pull(char)
+
+  return(str_saut_ligne)
+}
