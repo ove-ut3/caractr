@@ -1,7 +1,7 @@
 #' conv_nombre_toutes_lettres
 #'
 #' @param nombre \dots
-#' @param type \dots
+#' @param type au choix : lettre|lettre_f|ieme|ieme_f|ieme_chiffre|ieme_chiffre_f
 #' @param langue \dots
 #'
 #' @export

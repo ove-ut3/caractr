@@ -9,7 +9,7 @@ conv_nombre_toutes_lettres(nombre, type = "lettre", langue = "fr")
 \arguments{
 \item{nombre}{\dots}
 
-\item{type}{\dots}
+\item{type}{au choix : lettre|lettre_f|ieme|ieme_f|ieme_chiffre|ieme_chiffre_f}
 
 \item{langue}{\dots}
 }
