@@ -16,7 +16,6 @@ Un vecteur de booléens.
 Valider des emails par regex
 }
 \examples{
-caractr::valider_email_regex("test@test")
-caractr::valider_email_regex("test@test.fr")
+caractr::valider_email_regex(c("test@test", "test@test.fr"))
 
 }
