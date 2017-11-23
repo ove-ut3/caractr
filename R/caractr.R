@@ -108,10 +108,14 @@ normaliser_char <- function(libelle){
   )
 
   normaliser_char <- normaliser_char %>%
-    stringr::str_replace_all("[[:punct:]\\s]+", "_") %>% # Remplacement de la ponctuation et des espaces par un underscore
-    stringr::str_replace_all("_$", "") %>% # Un undersore en fin de chaine est supprimé
-    stringr::str_replace_all("[^\\w]", "") %>% # Tous les caractères non-alphanumériques sont supprimés
-    caractr::sans_accent() # Conversion des accents
+    # Remplacement de la ponctuation et des espaces par un underscore
+    stringr::str_replace_all("[[:punct:]\\s]+", "_") %>%
+    # Un undersore en fin de chaine est supprimé
+    stringr::str_replace_all("_$", "") %>%
+    # Tous les caractères non-alphanumériques sont supprimés
+    stringr::str_replace_all("[^\\w]", "") %>%
+    # Conversion des accents
+    caractr::sans_accent()
 
   return(normaliser_char)
 }
@@ -273,7 +277,7 @@ maj_accent <- function(libelle) {
     dplyr::group_by(cle, libelle) %>%
     dplyr::summarise(libelle_accent = paste(mot_accent, collapse = "")) %>%
     dplyr::ungroup() %>%
-    .[["libelle_accent"]]
+    dplyr::pull(libelle_accent)
 
   return(maj_accent)
 }
@@ -327,7 +331,7 @@ appliquer_casse <- function(libelle, libelle_casse) {
     dplyr::right_join(tibble::tibble(num_libelle = 1:length(libelle)),
                      by = "num_libelle") %>%
     dplyr::mutate(libelle = caractr::conv_ods_na_vide(libelle)) %>%
-    .[["libelle"]]
+    dplyr::pull(libelle)
 
   return(appliquer_casse)
 }

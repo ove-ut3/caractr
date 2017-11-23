@@ -9,7 +9,7 @@ conv_nombre_toutes_lettres <- function(nombre, type = "lettre", langue = "fr") {
 
   conv_nombre_toutes_lettres <- dplyr::tibble(nombre) %>%
     dplyr::left_join(caractr::mots_lettres, by = "nombre") %>%
-    .[[type]]
+    dplyr::pull(type)
 
   return(conv_nombre_toutes_lettres)
 }

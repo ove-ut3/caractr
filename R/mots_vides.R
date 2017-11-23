@@ -28,7 +28,7 @@
 prx_mots_vides <- function(langue = "fr", excepte = NULL, selection = NULL){
 
   prx_mots_vides <- dplyr::filter(caractr::mots_vides, code_langue == langue) %>%
-    .[["mot_vide"]]
+    dplyr::pull(mot_vide)
 
   if (!is.null(excepte)) {
     prx_mots_vides <- setdiff(prx_mots_vides, excepte)
@@ -92,7 +92,7 @@ maj_casse <- function(libelle, excepte = NULL, code_langue = "fr"){
     dplyr::summarise(libelle = paste2(mot_casse, collapse = " ")) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(libelle = stringr::str_replace_all(libelle, "\\b(d|l)\\s", "\\1'")) %>%
-    .[["libelle"]]
+    dplyr::pull(libelle)
 
   return(maj_casse)
 }
