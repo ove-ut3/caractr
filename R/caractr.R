@@ -229,6 +229,10 @@ paste2 <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
 #' @export
 paste_na <- function(..., sep = " ", collapse = NULL) {
 
+  if (any(purrr::map_lgl(list(...), ~ length(.) == 0))) {
+    return(character(0))
+  }
+
   paste_na <- data.frame(..., stringsAsFactors = FALSE)
 
   is_na <- is.na.data.frame(paste_na) %>%
