@@ -190,6 +190,10 @@ conv_ods_pv_na <- function(libelle){
 #' @export
 paste2 <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
 
+  if (any(purrr::map_lgl(list(...), ~ length(.) == 0))) {
+    return(character(0))
+  }
+
   if (na.rm == FALSE) {
     paste(..., sep = sep, collapse = collapse)
   } else {
