@@ -371,6 +371,8 @@ str_fichier <- function(char) {
 #' Passage en libellé de pourcentage d'une valeur numérique.
 #'
 #' @param valeur Un vecteur de valeurs numérique.
+#' @param decimales Le nombre de décimales.
+#' @param symbole_pct Affichage ou non du caractère "%".
 #'
 #' @return Un vecteur de libellés de pourcentages.
 #'
@@ -378,9 +380,13 @@ str_fichier <- function(char) {
 #' caractr::lib_pourcentage(0.1)
 #'
 #' @export
-lib_pourcentage <- function(valeur, decimales = 1) {
+lib_pourcentage <- function(valeur, decimales = 1, symbole_pct = TRUE) {
 
   lib_pourcentage <- caractr::paste_na(round(valeur * 100, decimales), "%")
+  if (symbole_pct == TRUE) {
+    lib_pourcentage <- caractr::paste_na(pourcentage, "%")
+
+  }
 
   return(lib_pourcentage)
 }

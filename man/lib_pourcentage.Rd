@@ -4,10 +4,14 @@
 \alias{lib_pourcentage}
 \title{Passage en libelle de pourcentage d'une valeur numerique}
 \usage{
-lib_pourcentage(valeur, decimales = 1)
+lib_pourcentage(valeur, decimales = 1, symbole_pct = TRUE)
 }
 \arguments{
 \item{valeur}{Un vecteur de valeurs numérique.}
+
+\item{decimales}{Le nombre de décimales.}
+
+\item{symbole_pct}{Affichage ou non du caractère "%".}
 }
 \value{
 Un vecteur de libellés de pourcentages.
