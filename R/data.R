@@ -4,10 +4,10 @@
 #' @keywords internal
 generer_data <- function() {
 
-  mots_vides <- importr::importer_table_access("mots_vides", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
+  mots_vides <- impexp::access_importer("mots_vides", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
   save("mots_vides", file = paste0(racine_packages, "caractr/data/mots_vides.RData"))
 
-  mots_lettres <- importr::importer_table_access("mots_lettres", paste0(racine_packages, "caractr/raw/Tables_ref.accdb")) %>%
+  mots_lettres <- impexp::access_importer("mots_lettres", paste0(racine_packages, "caractr/raw/Tables_ref.accdb")) %>%
     dplyr::mutate(lettre_f = ifelse(lettre == "un", "une", lettre),
                   ieme = paste0(lettre, "ième"),
                   ieme = ifelse(nombre == 0, NA_character_, ieme),
