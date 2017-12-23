@@ -274,7 +274,7 @@ maj_accent <- function(libelle) {
     stop("Le premier paramètre doit être de type character", call. = FALSE)
   }
 
-  maj_accent <- tibble::tibble(libelle) %>%
+  maj_accent <- dplyr::tibble(libelle) %>%
     dplyr::mutate(cle = row_number(),
                   mot = libelle) %>%
     tidyr::separate_rows(mot, sep = "\\b") %>%
@@ -318,7 +318,7 @@ appliquer_casse <- function(libelle, libelle_casse) {
     stop("Les chaines de caractères des deux paramètres doivent être toutes de même longueur deux à deux", call. = FALSE)
   }
 
-  appliquer_casse <- tibble::tibble(libelle, libelle_casse) %>%
+  appliquer_casse <- dplyr::tibble(libelle, libelle_casse) %>%
     dplyr::mutate(libelle = stringr::str_split(libelle, ""),
                   libelle_casse = stringr::str_split(libelle_casse, "")) %>%
     tidyr::unnest(.id = "num_libelle")
@@ -336,7 +336,7 @@ appliquer_casse <- function(libelle, libelle_casse) {
     dplyr::group_by(num_libelle) %>%
     dplyr::summarise(libelle = paste0(libelle, collapse = "")) %>%
     dplyr::ungroup() %>%
-    dplyr::right_join(tibble::tibble(num_libelle = 1:length(libelle)),
+    dplyr::right_join(dplyr::tibble(num_libelle = 1:length(libelle)),
                      by = "num_libelle") %>%
     dplyr::mutate(libelle = caractr::conv_ods_na_vide(libelle)) %>%
     dplyr::pull(libelle)
@@ -409,7 +409,7 @@ lib_pourcentage <- function(valeur, decimales = 1, symbole_pct = TRUE) {
 #' @export
 str_saut_ligne <- function(char, n_char_max, collapse = "\n") {
 
-  str_saut_ligne <- tibble::tibble(char = char) %>%
+  str_saut_ligne <- dplyr::tibble(char = char) %>%
     dplyr::mutate(char = stringr::str_split(char, " ")) %>%
     tidyr::unnest(.id = "id") %>%
     dplyr::group_by(id) %>%

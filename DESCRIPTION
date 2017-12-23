@@ -13,5 +13,4 @@ Imports:
     dplyr,
     purrr,
     stringr,
-    tibble,
     tidyr

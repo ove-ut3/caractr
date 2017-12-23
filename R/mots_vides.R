@@ -74,7 +74,7 @@ maj_casse <- function(libelle, excepte = NULL, code_langue = "fr"){
 
   prx_mots_vides <- prx_mots_vides(langue = code_langue)
 
-  maj_casse <- tibble::tibble(mot = libelle) %>%
+  maj_casse <- dplyr::tibble(mot = libelle) %>%
     dplyr::mutate(cle = row_number()) %>%
     tidyr::separate_rows(mot, sep = " ") %>%
     dplyr::mutate(
