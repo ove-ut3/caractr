@@ -382,11 +382,11 @@ str_fichier <- function(char) {
 #' @export
 lib_pourcentage <- function(valeur, decimales = 1, symbole_pct = TRUE) {
 
-  pourcentage <- round(valeur * 100, decimales) %>%
+  lib_pourcentage <- round(valeur * 100, decimales) %>%
     stringr::str_replace("\\.", ",")
 
   if (symbole_pct == TRUE) {
-    lib_pourcentage <- caractr::paste_na(pourcentage, "%")
+    lib_pourcentage <- caractr::paste_na(lib_pourcentage, "%")
 
   }
 
