@@ -358,8 +358,8 @@ appliquer_casse <- function(libelle, libelle_casse) {
 str_fichier <- function(char) {
 
   str_fichier <- char %>%
-    stringr::str_replace_all("(\\w)([\\<\\>:|\\?\\*/\\\\])", "\\1 \\2") %>%
-    stringr::str_replace_all("[\\<\\>:|\\?\\*/\\\\]", " - ") %>%
+    stringr::str_replace_all("(\\w)([\\<\\>:|\\?\\*\\\\])", "\\1 \\2") %>%
+    stringr::str_replace_all("[\\<\\>:|\\?\\*\\\\]", " - ") %>%
     stringr::str_replace_all(" +", " ")
 
   return(str_fichier)
@@ -424,4 +424,24 @@ str_saut_ligne <- function(char, n_char_max, collapse = "\n") {
     dplyr::pull(char)
 
   return(str_saut_ligne)
+}
+
+#' Passage d'un nom de champ de la casse camel a snake
+#'
+#' Passage d'un nom de champ de la casse camel à snake.
+#'
+#' @param char Un vecteur de chaines de caractères à la casse camel.
+#'
+#' @return Un vecteur de chaines de caractères à la casse snake.
+#'
+#' @examples
+#' caractr::camel_to_snake_case(c("emploiNN1Type", "rechercheEmploi"))
+#'
+#' @export
+camel_to_snake_case <- function(char) {
+
+  camel_to_snake_case <- gsub("([A-Z])", "_\\L\\1\\E", char, perl = TRUE) %>%
+    tolower()
+
+  return(camel_to_snake_case)
 }
