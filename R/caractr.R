@@ -111,9 +111,9 @@ normaliser_char <- function(libelle){
     # Remplacement de la ponctuation et des espaces par un underscore
     stringr::str_replace_all("[[:punct:]\\s]+", "_") %>%
     # Un undersore en fin de chaine est supprimé
-    stringr::str_replace_all("_$", "") %>%
+    stringr::str_remove_all("_$") %>%
     # Tous les caractères non-alphanumériques sont supprimés
-    stringr::str_replace_all("[^\\w]", "") %>%
+    stringr::str_remove_all("[^\\w]") %>%
     # Conversion des accents
     caractr::sans_accent()
 

@@ -79,7 +79,7 @@ maj_casse <- function(libelle, excepte = NULL, code_langue = "fr"){
     tidyr::separate_rows(mot, sep = " ") %>%
     dplyr::mutate(
       # Si le mot (sans ponctuation) est un mot vide, on le passe en minuscule
-      mot_casse = ifelse(stringr::str_detect(stringr::str_replace_all(mot, "[[:punct:]]", ""), stringr::regex(prx_mots_vides, ignore_case = TRUE)) & row_number() != 1,
+      mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(mot, "[[:punct:]]"), stringr::regex(prx_mots_vides, ignore_case = TRUE)) & row_number() != 1,
                                      tolower(mot), NA_character_),
       # Si c'est un mot de la liste excepte, on le laisse tel quel
       mot_casse = ifelse(is.na(mot_casse) & mot %in% excepte, mot, mot_casse),
