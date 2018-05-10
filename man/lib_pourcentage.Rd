@@ -11,7 +11,7 @@ lib_pourcentage(valeur, decimales = 1, symbole_pct = TRUE)
 
 \item{decimales}{Le nombre de décimales.}
 
-\item{symbole_pct}{Affichage ou non du caractère "%".}
+\item{symbole_pct}{Affichage ou non du caractère "\%".}
 }
 \value{
 Un vecteur de libellés de pourcentages.

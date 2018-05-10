@@ -372,7 +372,7 @@ str_fichier <- function(char) {
 #'
 #' @param valeur Un vecteur de valeurs numérique.
 #' @param decimales Le nombre de décimales.
-#' @param symbole_pct Affichage ou non du caractère "%".
+#' @param symbole_pct Affichage ou non du caractère "\%".
 #'
 #' @return Un vecteur de libellés de pourcentages.
 #'
