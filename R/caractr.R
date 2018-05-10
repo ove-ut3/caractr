@@ -445,3 +445,22 @@ camel_to_snake_case <- function(char) {
 
   return(camel_to_snake_case)
 }
+
+#' remplace l'apostrophe Windows par l'apostrophe ASCII
+#'
+#' remplace l'apostrophe Windows par l'apostrophe ASCII.
+#'
+#' @param char Un vecteur de chaines de caractères.
+#'
+#' @return Un vecteur de chaines de caractères sans apostrophe Windows.
+#'
+#' @examples
+#' caractr::str_apostrophe("Un emploi qui n’a pas de lien avec vos études")
+#'
+#' @export
+str_apostrophe <- function(char) {
+
+  str_apostrophe <- stringr::str_replace_all(char, "’", "'")
+
+  return(str_apostrophe)
+}
