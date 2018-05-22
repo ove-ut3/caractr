@@ -275,7 +275,7 @@ maj_accent <- function(libelle) {
   }
 
   maj_accent <- dplyr::tibble(libelle) %>%
-    dplyr::mutate(cle = row_number(),
+    dplyr::mutate(cle = dplyr::row_number(),
                   mot = libelle) %>%
     tidyr::separate_rows(mot, sep = "\\b") %>%
     dplyr::mutate(mot_lc = tolower(mot)) %>%
