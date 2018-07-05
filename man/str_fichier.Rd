@@ -4,10 +4,12 @@
 \alias{str_fichier}
 \title{Normaliser des chaines de caractere en tant que nom de fichier}
 \usage{
-str_fichier(char)
+str_fichier(char, replace_slash = TRUE)
 }
 \arguments{
 \item{char}{Un vecteur de type caractère.}
+
+\item{replace_slash}{Remplace aussi le caractère /.}
 }
 \value{
 Un vecteur de type caractère prêts à être utilisés en tant que nom de fichier.
