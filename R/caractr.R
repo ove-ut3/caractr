@@ -360,7 +360,7 @@ lib_pourcentage <- function(valeur, decimales = 1, symbole_pct = TRUE) {
     stringr::str_replace("\\.", ",")
 
   if (symbole_pct == TRUE) {
-    lib_pourcentage <- caractr::paste_na(lib_pourcentage, "%")
+    lib_pourcentage <- stringr::str_c(lib_pourcentage, "%", sep = "\U202F")
 
   }
 
