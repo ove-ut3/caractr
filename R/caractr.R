@@ -215,38 +215,6 @@ paste2 <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
   }
 }
 
-#' Derive de la fonction paste() mais retourne NA si un seul des elements est a NA
-#'
-#' Dérivé de la fonction \code{paste()} mais retourne \code{NA} si un seul des elements est a \code{NA}\cr
-#'
-#' @param ... Des chaines de caractère à concaténer.
-#'
-#' @return Une chaine de caractère concaténée sans \code{NA}.
-#'
-#' @examples
-#' # Avec la fonction paste() classique
-#' paste("chaine1", NA_character_, "chaine2")
-#'
-#' # Avec la fonction paste_na()
-#' caractr::paste_na("chaine1", NA_character_, "chaine2")
-#'
-#' @export
-paste_na <- function(..., sep = " ", collapse = NULL) {
-
-  if (any(purrr::map_lgl(list(...), ~ length(.) == 0))) {
-    return(character(0))
-  }
-
-  paste_na <- data.frame(..., stringsAsFactors = FALSE)
-
-  is_na <- is.na.data.frame(paste_na) %>%
-    apply(1, function(x) any(x))
-
-  paste_na <- ifelse(is_na, NA_character_, apply(paste_na, 1, paste, collapse = sep))
-
-  return(paste_na)
-}
-
 #' Mise a jour de mots non-accentues
 #'
 #' Mise à jour de mots non-accentués.
