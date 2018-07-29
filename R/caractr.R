@@ -4,7 +4,7 @@
 #'
 #' @param string Input character vector.
 #'
-#' @return Output character vector.
+#' @return A character vector.
 #'
 #' @examples
 #' caractr::str_remove_accent("Université de Franche-Comté")

@@ -10,7 +10,7 @@ str_remove_accent(string)
 \item{string}{Input character vector.}
 }
 \value{
-Output character vector.
+A character vector.
 }
 \description{
 Found on : \url{http://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding}
