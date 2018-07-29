@@ -153,47 +153,39 @@ str_paste <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
   }
 }
 
-#' Mise a jour de mots non-accentues
+#' Add French accents to a string.
 #'
-#' Mise à jour de mots non-accentués.
+#' @param string Input character vector.
 #'
-#' @param libelle Un vecteur de type caractère.
+#' @return A character vector.
 #'
-#' @return Un vecteur de type caractère dont les mots sont accentués.
-#'
-#' Jeu de données source : \code{caractr::mot_accent}.\cr
-#' Il est créé à partir d'une table source SAS (projet "Text mining").\cr
+#' Source dataset : \code{caractr::word_fr_accent}.\cr
 #'
 #' @examples
-#' # Un exemple qui fonctionne bien
-#' caractr::maj_accent("Ecole superieure de commerce de Troyes")
-#'
-#' # Un exemple qui fonctionne à moitié
-#' caractr::maj_accent("Universite de Franche-Comte")
+#' caractr::str_add_fr_accent("Ecole superieure de commerce de Troyes")
+#' caractr::str_add_fr_accent("Universite de Franche-Comte")
 #'
 #' @export
-maj_accent <- function(libelle) {
+str_add_fr_accent <- function(string) {
 
-  #libelle <- "Ecole superieure de commerce de Troyes"
-
-  if (class(libelle) != "character") {
-    stop("Le premier paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  maj_accent <- dplyr::tibble(libelle) %>%
+  with_accent <- dplyr::tibble(string) %>%
     dplyr::mutate(cle = dplyr::row_number(),
-                  mot = libelle) %>%
-    tidyr::separate_rows(mot, sep = "\\b") %>%
-    dplyr::mutate(mot_lc = tolower(mot)) %>%
-    dplyr::left_join(caractr::mot_accent, by = c("mot_lc" = "sans_accent")) %>%
-    dplyr::mutate(mot_accent = ifelse(!is.na(avec_accent), avec_accent, mot_lc),
-                  mot_accent = caractr::appliquer_casse(mot_accent, mot)) %>%
-    dplyr::group_by(cle, libelle) %>%
-    dplyr::summarise(libelle_accent = paste(mot_accent, collapse = "")) %>%
+                  word = string) %>%
+    tidyr::separate_rows(word, sep = "\\b") %>%
+    dplyr::mutate(word_lc = tolower(word)) %>%
+    dplyr::left_join(caractr::word_fr_accent, by = c("word_lc" = "word")) %>%
+    dplyr::mutate(word_fr_accent = ifelse(!is.na(word_fr_accent), word_fr_accent, word_lc),
+                  word_fr_accent = caractr::appliquer_casse(word_fr_accent, word)) %>%
+    dplyr::group_by(cle, string) %>%
+    dplyr::summarise(string_accent = caractr::str_paste(word_fr_accent, collapse = "")) %>%
     dplyr::ungroup() %>%
-    dplyr::pull(libelle_accent)
+    dplyr::pull(string_accent)
 
-  return(maj_accent)
+  return(with_accent)
 }
 
 #' Appliquer la casse d'une premiere chaine de caracteres vers une seconde chaine de caracteres
