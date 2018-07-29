@@ -1,33 +1,32 @@
-#' Supprimer les accents d'une chaine de caracteres
+#' Remove accents in a string.
 #'
-#' Supprimer les accents d'une chaine de caractères.\cr
+#' Found on : \url{http://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding}
 #'
-#' Trouvé sur : \url{http://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding}
+#' @param string Input character vector.
 #'
-#' @param libelle Un vecteur de type caractère.
-#'
-#' @return Un vecteur de type caractère sans accent.
+#' @return Output character vector.
 #'
 #' @examples
-#' caractr::sans_accent("Université de Franche-Comté")
+#' caractr::str_remove_accent("Université de Franche-Comté")
 #'
 #' @export
-sans_accent <- function(libelle) {
+str_remove_accent <- function(string) {
 
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  sans_accent <- iconv(libelle, from = "UTF-8", to = "ASCII//TRANSLIT")
+  no_accents <- iconv(string, from = "UTF-8", to = "ASCII//TRANSLIT")
 
-  position_na <- which(is.na(sans_accent) & !is.na(libelle))
-  if (length(position_na) >= 1) {
-    sans_accent[position_na] <- iconv(libelle[position_na],
-                                      from = "Windows-1252",
-                                      to = "ASCII//TRANSLIT")
+  # If iconv from UT8 did not work, iconv from Windows-1252
+  position_na_utf8 <- which(is.na(no_accents) & !is.na(string))
+  if (length(position_na_utf8) >= 1) {
+    no_accents[position_na_utf8] <- iconv(string[position_na_utf8],
+                                          from = "Windows-1252",
+                                          to = "ASCII//TRANSLIT")
   }
 
-  return(sans_accent)
+  return(no_accents)
 }
 
 #' Supprimer la ponctuation d'une chaine de caracteres
@@ -115,7 +114,7 @@ normaliser_char <- function(libelle){
     # Tous les caractères non-alphanumériques sont supprimés
     stringr::str_remove_all("[^\\w]") %>%
     # Conversion des accents
-    caractr::sans_accent()
+    caractr::str_remove_accent()
 
   return(normaliser_char)
 }
