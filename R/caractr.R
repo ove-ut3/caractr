@@ -69,46 +69,45 @@ str_capitalise <- function(string){
   return(sub("^([[:alpha:]])", "\\U\\1\\E", string, perl = TRUE))
 }
 
-#' Normaliser une chaine de caracteres (utilisation pour un nom de champ dans une table)
+#' Normalise a string for a use as table field name.
 #'
-#' Normaliser une chaine de caractères (utilisation pour un nom de champ dans une table).
+#' @param string Input character vector.
 #'
-#' @param libelle Un vecteur de type caractère.
-#'
-#' @return Un vecteur de type caractère contenant les libellés normalisés.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::normaliser_char(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
+#' caractr::str_normalise(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
 #'
 #' @export
-normaliser_char <- function(libelle){
+str_normalise <- function(string){
 
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  normaliser_char <- tryCatch(
+  # Lower case and conv from ISO-8859-1 if it does not work
+  normalised_string <- tryCatch(
     {
-      tolower(libelle)
+      tolower(string)
     },
     error = function(cond) {
-      normaliser_char <- stringr::str_conv(libelle, "ISO-8859-1") %>%
+      normalised_string <- stringr::str_conv(string, "ISO-8859-1") %>%
         tolower()
-      return(normaliser_char)
+      return(normalised_string)
     }
   )
 
-  normaliser_char <- normaliser_char %>%
-    # Remplacement de la ponctuation et des espaces par un underscore
+  normalised_string <- normalised_string %>%
+    # Replacement of punctuation and spaces by an underscore
     stringr::str_replace_all("[[:punct:]\\s]+", "_") %>%
-    # Un undersore en fin de chaine est supprimé
+    # A trailing undersore is removed
     stringr::str_remove_all("_$") %>%
-    # Tous les caractères non-alphanumériques sont supprimés
+    # All non alphanumeric strings are removed
     stringr::str_remove_all("[^\\w]") %>%
-    # Conversion des accents
+    # All accents are removed
     caractr::str_remove_accent()
 
-  return(normaliser_char)
+  return(normalised_string)
 }
 
 #' Open data - Convertir les NA d'une chaine de caracteres vers une chaine vide
