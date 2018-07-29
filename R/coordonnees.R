@@ -20,22 +20,20 @@ str_clean_phone_number <- function(phone_number) {
   return(cleaned_phone_number)
 }
 
-#' Valider des emails par regex
+#' Validate email with a regex.
 #'
-#' Valider des emails par regex
+#' @param email A email vector.
 #'
-#' @param email Un vecteur d'emails
-#'
-#' @return Un vecteur de booléens.
+#' @return A boolean vector.
 #'
 #' @examples
-#' caractr::valider_email_regex(c("test@test", "test@test.fr"))
+#' caractr::str_validate_email(c("test@test", "test@test.fr"))
 #'
 #' @export
-valider_email_regex <- function(email) {
+str_validate_email <- function(email) {
 
-  valider_email_regex <- email %>%
+  str_validate_email <- email %>%
     stringr::str_detect(stringr::regex("^[a-z0-9\\._%-]+@[a-z0-9\\.-]+\\.[a-z]{2,4}$", ignore_case = TRUE))
 
-  return(valider_email_regex)
+  return(str_validate_email)
 }
