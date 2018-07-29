@@ -286,37 +286,35 @@ str_percent <- function(x, digits = 1, symbol = TRUE) {
   return(percent)
 }
 
-#' Decoupage d'une chaine de caracteres sur plusieurs lignes
+#' Cut a character string over multiple lines
 #'
-#' Découpage d'une chaine de caractères sur plusieurs lignes.
+#' @param string Input character vector.
+#' @param nchar_max The maximum number of character per line.
+#' @param collapse A character string to separate the results.
 #'
-#' @param char Un vecteur de chaines de caractères.
-#' @param n_char_max Un nombre de caractères maximum par ligne.
-#' @param collapse Le séparateur pour le saut de ligne.
-#'
-#' @return Un vecteur de chaines de caractères.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::str_saut_ligne(c("Une très très très très très très longue chaine de caractère", "test"), nchar = 40)
+#' caractr::str_line_break(c("Une très très très très très très longue chaine de caractère", "test"), nchar_max = 40)
 #'
 #' @export
-str_saut_ligne <- function(char, n_char_max, collapse = "\n") {
+str_line_break <- function(string, nchar_max, collapse = "\n") {
 
-  str_saut_ligne <- dplyr::tibble(char = char) %>%
-    dplyr::mutate(char = stringr::str_split(char, " ")) %>%
+  str_line_break <- dplyr::tibble(string = string) %>%
+    dplyr::mutate(string = stringr::str_split(string, " ")) %>%
     tidyr::unnest(.id = "id") %>%
     dplyr::group_by(id) %>%
-    dplyr::mutate(n_char = (nchar(char) + 1) %>%
+    dplyr::mutate(nchar = (nchar(string) + 1) %>%
                     cumsum()) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(ligne = cut(n_char, seq.int(0, max(dplyr::pull(., n_char)) +  n_char_max - max(dplyr::pull(., n_char)) %% n_char_max  , by = n_char_max))) %>%
+    dplyr::mutate(ligne = cut(nchar, seq.int(0, max(dplyr::pull(., nchar)) +  nchar_max - max(dplyr::pull(., nchar)) %% nchar_max , by = nchar_max))) %>%
     dplyr::group_by(id, ligne) %>%
-    dplyr::summarise(char = paste(char, collapse = " ")) %>%
+    dplyr::summarise(string = paste(string, collapse = " ")) %>%
     dplyr::group_by(id) %>%
-    dplyr::summarise(char = paste(char, collapse = collapse)) %>%
-    dplyr::pull(char)
+    dplyr::summarise(string = paste(string, collapse = collapse)) %>%
+    dplyr::pull(string)
 
-  return(str_saut_ligne)
+  return(str_line_break)
 }
 
 #' Passage d'un nom de champ de la casse camel a snake
