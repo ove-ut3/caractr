@@ -1,15 +1,24 @@
-#' conv_nombre_toutes_lettres
+#' Convert a numeric vector to full letters.
 #'
-#' @param nombre \dots
-#' @param type au choix : lettre|lettre_f|ieme|ieme_f|ieme_chiffre|ieme_chiffre_f
-#' @param langue \dots
+#' @param x A numeric vector.
+#' @param type Choice between : lettre|ieme|ieme_chiffre
+#' @param female If \code{TRUE}, female form.
+#' @param language French language only available.
+#'
+#' @examples
+#' caractr::str_conv_number_letter(1:10)
+#' caractr::str_conv_number_letter(1, female = TRUE)
 #'
 #' @export
-conv_nombre_toutes_lettres <- function(nombre, type = "lettre", langue = "fr") {
+str_conv_number_letter <- function(x, type = "lettre", female = FALSE, language = "fr") {
 
-  conv_nombre_toutes_lettres <- dplyr::tibble(nombre) %>%
-    dplyr::left_join(caractr::mots_lettres, by = "nombre") %>%
+  if (female) {
+    type <- paste0(type, "_f")
+  }
+
+  letter <- dplyr::tibble(x) %>%
+    dplyr::left_join(caractr::mots_lettres, by = c("x" = "nombre")) %>%
     dplyr::pull(type)
 
-  return(conv_nombre_toutes_lettres)
+  return(letter)
 }
