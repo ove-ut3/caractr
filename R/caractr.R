@@ -238,32 +238,27 @@ str_apply_case <- function(string, target) {
   return(apply_case)
 }
 
-#' Normaliser des chaines de caractere en tant que nom de fichier
+#' Normalise a string for a use as file name.
 #'
-#' Normaliser des chaines de caractère en tant que nom de fichier.
+#' @param string Input character vector.
+#' @param replace_slash Replace also \code{/} character.
 #'
-#' @param char Un vecteur de type caractère.
-#' @param replace_slash Remplace aussi le caractère /.
-#'
-#' @return Un vecteur de type caractère prêts à être utilisés en tant que nom de fichier.
-#'
-#' @examples
+#' @return A character vector.
 #'
 #' @export
-str_fichier <- function(char, replace_slash = TRUE) {
+str_normalise_file <- function(string, replace_slash = TRUE) {
 
-  str_fichier <- char %>%
+  normalised_string <- string %>%
     stringr::str_replace_all("(\\w)([\\<\\>:|\\?\\*\\\\])", "\\1 \\2") %>%
     stringr::str_replace_all("[\\<\\>:|\\?\\*\\\\]", " - ")
 
   if (replace_slash == TRUE) {
-    str_fichier <- stringr::str_replace_all(str_fichier, "/", "-")
+    normalised_string <- stringr::str_replace_all(normalised_string, "/", "-")
   }
 
-  str_fichier <- stringr::str_replace_all(str_fichier, " +", " ")
+  normalised_string <- stringr::str_replace_all(normalised_string, " +", " ")
 
-  return(str_fichier)
-
+  return(normalised_string)
 }
 
 #' Passage en libelle de pourcentage d'une valeur numerique
