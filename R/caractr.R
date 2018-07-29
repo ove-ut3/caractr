@@ -29,29 +29,25 @@ str_remove_accent <- function(string) {
   return(no_accents)
 }
 
-#' Supprimer la ponctuation d'une chaine de caracteres
+#' Remove punctuation in a string.
 #'
-#' Supprimer la ponctuation d'une chaine de caractères
+#' @param string Input character vector.
+#' @param replacement A character vector of replacements.
 #'
-#' @param libelle Un vecteur de type caractère.
-#' @param remplacement Le caractère de remplacement de la ponctuation.
-#'
-#' @return Un vecteur de type caractère sans ponctuation.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::sans_ponctuation("Université Paris-Est Créteil Val-de-Marne")
-#' caractr::sans_ponctuation("Université Paris-Est Créteil Val-de-Marne", remplacement = "_")
+#' caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne")
+#' caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne", replacement = "_")
 #'
 #' @export
-sans_ponctuation <- function(libelle, remplacement = " "){
+str_remove_punct <- function(string, replacement = " "){
 
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  sans_ponctuation <- stringr::str_replace_all(libelle, "[[:punct:]]+", remplacement)
-
-  return(sans_ponctuation)
+  return(stringr::str_replace_all(string, "[[:punct:]]+", replacement))
 }
 
 #' Mettre une capitale a la premiere lettre d'une chaine de caracteres
