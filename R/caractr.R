@@ -50,27 +50,23 @@ str_remove_punct <- function(string, replacement = " "){
   return(stringr::str_replace_all(string, "[[:punct:]]+", replacement))
 }
 
-#' Mettre une capitale a la premiere lettre d'une chaine de caracteres
+#' Capitalise the first letter in a string.
 #'
-#' Mettre une capitale à la première lettre d'une chaine de caractères.
+#' @param string Input character vector.
 #'
-#' @param libelle Un vecteur de type caractère.
-#'
-#' @return Un vecteur de type caractère dont la première lettre de chaque élément est une majuscule.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::str_capitaliser("université de Caen Normandie")
+#' caractr::str_capitalise("université de Caen Normandie")
 #'
 #' @export
-str_capitaliser <- function(libelle){
+str_capitalise <- function(string){
 
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  str_capitaliser <- sub("^([[:alpha:]])", "\\U\\1\\E", libelle, perl = TRUE)
-
-  return(str_capitaliser)
+  return(sub("^([[:alpha:]])", "\\U\\1\\E", string, perl = TRUE))
 }
 
 #' Normaliser une chaine de caracteres (utilisation pour un nom de champ dans une table)
