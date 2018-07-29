@@ -317,21 +317,19 @@ str_line_break <- function(string, nchar_max, collapse = "\n") {
   return(str_line_break)
 }
 
-#' Passage d'un nom de champ de la casse camel a snake
+#' Conversion from a camel case character to a snake case character.
 #'
-#' Passage d'un nom de champ de la casse camel à snake.
+#' @param string Input character vector.
 #'
-#' @param char Un vecteur de chaines de caractères à la casse camel.
-#'
-#' @return Un vecteur de chaines de caractères à la casse snake.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::camel_to_snake_case(c("emploiNN1Type", "rechercheEmploi"))
+#' caractr::str_camel_to_snake_case(c("emploiNN1Type", "rechercheEmploi"))
 #'
 #' @export
-camel_to_snake_case <- function(char) {
+str_camel_to_snake_case <- function(string) {
 
-  camel_to_snake_case <- gsub("([A-Z])", "_\\L\\1\\E", char, perl = TRUE) %>%
+  camel_to_snake_case <- gsub("([A-Z])", "_\\L\\1\\E", string, perl = TRUE) %>%
     tolower()
 
   return(camel_to_snake_case)
