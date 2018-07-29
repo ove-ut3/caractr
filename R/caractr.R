@@ -261,31 +261,29 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
   return(normalised_string)
 }
 
-#' Passage en libelle de pourcentage d'une valeur numerique
+#' Conversion from a numeric percentage to a character label.
 #'
-#' Passage en libellé de pourcentage d'une valeur numérique.
+#' @param x A numeric vector.
+#' @param digits Integer indicating the number of decimal places.
+#' @param symbol Display of "\%".
 #'
-#' @param valeur Un vecteur de valeurs numérique.
-#' @param decimales Le nombre de décimales.
-#' @param symbole_pct Affichage ou non du caractère "\%".
-#'
-#' @return Un vecteur de libellés de pourcentages.
+#' @return A character vector.
 #'
 #' @examples
-#' caractr::lib_pourcentage(0.1)
+#' caractr::str_percent(0.1)
 #'
 #' @export
-lib_pourcentage <- function(valeur, decimales = 1, symbole_pct = TRUE) {
+str_percent <- function(x, digits = 1, symbol = TRUE) {
 
-  lib_pourcentage <- round(valeur * 100, decimales) %>%
+  percent <- round(x * 100, digits) %>%
     stringr::str_replace("\\.", ",")
 
-  if (symbole_pct == TRUE) {
-    lib_pourcentage <- stringr::str_c(lib_pourcentage, "%", sep = "\U202F")
+  if (symbol == TRUE) {
+    percent <- stringr::str_c(percent, "%", sep = "\U202F")
 
   }
 
-  return(lib_pourcentage)
+  return(percent)
 }
 
 #' Decoupage d'une chaine de caracteres sur plusieurs lignes
