@@ -179,7 +179,7 @@ str_add_fr_accent <- function(string) {
     dplyr::mutate(word_lc = tolower(word)) %>%
     dplyr::left_join(caractr::word_fr_accent, by = c("word_lc" = "word")) %>%
     dplyr::mutate(word_fr_accent = ifelse(!is.na(word_fr_accent), word_fr_accent, word_lc),
-                  word_fr_accent = caractr::appliquer_casse(word_fr_accent, word)) %>%
+                  word_fr_accent = caractr::str_apply_case(word_fr_accent, word)) %>%
     dplyr::group_by(cle, string) %>%
     dplyr::summarise(string_accent = caractr::str_paste(word_fr_accent, collapse = "")) %>%
     dplyr::ungroup() %>%
@@ -188,57 +188,54 @@ str_add_fr_accent <- function(string) {
   return(with_accent)
 }
 
-#' Appliquer la casse d'une premiere chaine de caracteres vers une seconde chaine de caracteres
+#' Apply case from a target character to another string.
 #'
-#' Appliquer la casse d'une première chaine de caractères vers une seconde chaine de caractères.
+#' @param string Input character vector.
+#' @param target A case target character vector.
 #'
-#' @param libelle Un vecteur de type caractère.
-#' @param libelle_casse Un vecteur de type caractère servant de modèle pour la casse.
-#'
-#' @return Un vecteur de type caractère dont la casse est mise à jour.
+#' @return A character vector.
 #'
 #' @examples
-#' # Un exemple
-#' caractr::appliquer_casse(c("test1", "test2"), libelle_casse = c("aaAaa", "bBBbb"))
+#' caractr::str_apply_case(c("test1", "test2"), target = c("aaAaa", "bBBbb"))
 #'
 #' @export
-appliquer_casse <- function(libelle, libelle_casse) {
+str_apply_case <- function(string, target) {
 
-  if (class(libelle) != "character" | class(libelle_casse) != "character") {
-    stop("Les deux paramètres doivent être de type character", call. = FALSE)
+  if (class(string) != "character" | class(target) != "character") {
+    stop("Both input vectors must be character vectors", call. = FALSE)
   }
 
-  if (length(libelle) != length(libelle_casse)) {
-    stop("Les deux paramètres doivent avoir le même nombre d'éléments", call. = FALSE)
+  if (length(string) != length(target)) {
+    stop("Both input vectors must have same length", call. = FALSE)
   }
 
-  if (all(nchar(libelle) == nchar(libelle_casse)) == FALSE) {
-    stop("Les chaines de caractères des deux paramètres doivent être toutes de même longueur deux à deux", call. = FALSE)
+  if (all(nchar(string) == nchar(target)) == FALSE) {
+    stop("Both input vectors must have same nchar 2 by 2", call. = FALSE)
   }
 
-  appliquer_casse <- dplyr::tibble(libelle, libelle_casse) %>%
-    dplyr::mutate(libelle = stringr::str_split(libelle, ""),
-                  libelle_casse = stringr::str_split(libelle_casse, "")) %>%
-    tidyr::unnest(.id = "num_libelle")
+  apply_case <- dplyr::tibble(string, target) %>%
+    dplyr::mutate(string = stringr::str_split(string, ""),
+                  target = stringr::str_split(target, "")) %>%
+    tidyr::unnest(.id = "id_string")
 
-  names(appliquer_casse) <- make.unique(names(appliquer_casse))
+  names(apply_case) <- make.unique(names(apply_case))
 
-  appliquer_casse <- dplyr::select(appliquer_casse, -4) %>%
-    dplyr::mutate(libelle = ifelse(libelle_casse == tolower(libelle_casse),
-                                   tolower(libelle),
-                                   libelle),
-                  libelle = ifelse(libelle_casse == toupper(libelle_casse),
-                                   toupper(libelle),
-                                   libelle)) %>%
-    dplyr::select(-libelle_casse) %>%
-    dplyr::group_by(num_libelle) %>%
-    dplyr::summarise(libelle = paste0(libelle, collapse = "")) %>%
+  apply_case <- dplyr::select(apply_case, -4) %>%
+    dplyr::mutate(string = ifelse(target == tolower(target),
+                                   tolower(string),
+                                   string),
+                  string = ifelse(target == toupper(target),
+                                   toupper(string),
+                                   string)) %>%
+    dplyr::select(-target) %>%
+    dplyr::group_by(id_string) %>%
+    dplyr::summarise(string = paste0(string, collapse = "")) %>%
     dplyr::ungroup() %>%
-    dplyr::right_join(dplyr::tibble(num_libelle = 1:length(libelle)),
-                     by = "num_libelle") %>%
-    dplyr::pull(libelle)
+    dplyr::right_join(dplyr::tibble(id_string = 1:length(string)),
+                     by = "id_string") %>%
+    dplyr::pull(string)
 
-  return(appliquer_casse)
+  return(apply_case)
 }
 
 #' Normaliser des chaines de caractere en tant que nom de fichier
