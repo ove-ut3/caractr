@@ -76,10 +76,10 @@ str_capitalise <- function(string){
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_normalise(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
+#' caractr::str_normalise_field(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
 #'
 #' @export
-str_normalise <- function(string){
+str_normalise_field <- function(string){
 
   if (class(string) != "character") {
     stop("Input vector must be a character vector", call. = FALSE)
