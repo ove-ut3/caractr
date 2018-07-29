@@ -2,9 +2,9 @@
 
 export("%>%")
 export(generate_data)
-export(maj_casse)
 export(nettoyer_numero_telephone)
 export(prx_stopwords)
+export(str_add_case)
 export(str_add_fr_accent)
 export(str_apply_case)
 export(str_camel_to_snake_case)

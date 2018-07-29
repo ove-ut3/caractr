@@ -43,55 +43,52 @@ prx_stopwords <- function(language = "fr", drop = NULL, keep = NULL){
   return(stopwords)
 }
 
-#' Mise a jour de la casse en prenant en compte les mots vides
+#' Update a character vector case according to stopwords.
 #'
-#' Mise en majuscule de la première lettre de chaque mot sauf les mots_vides.
+#' @param string Input character vector.
+#' @param drop Stop words to drop.
+#' @param language Stop word language.
 #'
-#' @param libelle Un vecteur de type caractère.
-#' @param excepte Vecteur de mots à ne pas mettre à jour.
-#' @param code_langue Code de la langue des mots vides.
-#'
-#' @return Un vecteur de type caractère dont tous les mots commencent par une majuscule sauf les mots vides de la langue sélectionnée.
+#' @return A character vector.
 #'
 #' @examples
-#' # un premier exemple
-#' caractr::maj_casse(c("boulevard D'argonne", "1 rue descartes"))
+#' caractr::str_add_case(c("boulevard D'argonne", "1 rue descartes"))
 #'
-#' # Un exemple avec un mot non-sélectionné
-#' caractr::maj_casse(c("boulevard D'argonne", "1 rue descartes"), excepte = "rue")
+#' # An example with a dropped word
+#' caractr::str_add_case(c("boulevard D'argonne", "1 rue descartes"), drop = "rue")
 #'
-#' # Un exemple en anglais
-#' caractr::maj_casse(c("GENETICS AND IMMUNOLOGY OF PARASITIC DISEASES",
-#'   "RESEARCH INSTITUTE  IN HEALTH"), code_langue = "en")
+#' # An English example
+#' caractr::str_add_case(c("GENETICS AND IMMUNOLOGY OF PARASITIC DISEASES",
+#'   "RESEARCH INSTITUTE  IN HEALTH"), language = "en")
 #'
 #' @export
-maj_casse <- function(libelle, excepte = NULL, code_langue = "fr"){
+str_add_case <- function(string, drop = NULL, language = "fr"){
 
-  if (class(libelle) != "character") {
-    stop("Le premier paramètre doit être de type character", call. = FALSE)
+  if (class(string) != "character") {
+    stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  prx_mots_vides <- prx_mots_vides(langue = code_langue)
+  prx_mots_vides <- prx_mots_vides(language)
 
-  maj_casse <- dplyr::tibble(mot = libelle) %>%
+  str_add_case <- dplyr::tibble(mot = string) %>%
     dplyr::mutate(cle = dplyr::row_number()) %>%
     tidyr::separate_rows(mot, sep = " ") %>%
     dplyr::mutate(
-      # Si le mot (sans ponctuation) est un mot vide, on le passe en minuscule
+      # If the word is a stop word -> lower case
       mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(mot, "[[:punct:]]"), stringr::regex(prx_mots_vides, ignore_case = TRUE)) & dplyr::row_number() != 1,
                                      tolower(mot), NA_character_),
-      # Si c'est un mot de la liste excepte, on le laisse tel quel
-      mot_casse = ifelse(is.na(mot_casse) & mot %in% excepte, mot, mot_casse),
-      # Dans les autres cas, on applique la fonction "str_to_title" (prop_case)
+      # If the word is the drop list -> lower case
+      mot_casse = ifelse(is.na(mot_casse) & mot %in% drop, mot, mot_casse),
+      # In other case, stringr::str_to_title
       mot_casse = ifelse(is.na(mot_casse), purrr::map_chr(mot, stringr::str_to_title), mot_casse),
-      # Modif de la casse finale : " D'argonne " devient " d'Argonne "
+      # Final update with words preceding quotes: " D'argonne " becomes " d'Argonne "
       mot_casse = sub("(D|L)'([[:alpha:]])", "\\L\\1\\E'\\U\\2\\E", mot_casse, perl = TRUE)
       ) %>%
     dplyr::group_by(cle) %>%
-    dplyr::summarise(libelle = paste2(mot_casse, collapse = " ")) %>%
+    dplyr::summarise(string = paste2(mot_casse, collapse = " ")) %>%
     dplyr::ungroup() %>%
-    dplyr::mutate(libelle = stringr::str_replace_all(libelle, "\\b(d|l)\\s", "\\1'")) %>%
-    dplyr::pull(libelle)
+    dplyr::mutate(string = stringr::str_replace_all(string, "\\b(d|l)\\s", "\\1'")) %>%
+    dplyr::pull(string)
 
-  return(maj_casse)
+  return(str_add_case)
 }
