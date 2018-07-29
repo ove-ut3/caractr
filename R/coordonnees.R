@@ -1,25 +1,23 @@
-#' Nettoyer des numeros de telephone
+#' Clean phone numbers.
 #'
-#' Nettoyer des numéros de téléphone.
+#' @param phone_number A vector of phone numbers.
 #'
-#' @param numero Un vecteur de numéros.
-#'
-#' @return Un vecteur de numéros nettoyés.
+#' @return A vector of cleaned phone numbers.
 #'
 #' @examples
-#' caractr::nettoyer_numero_telephone("06.00.00.00.00")
+#' caractr::str_clean_phone_number("06.00.00.00.00")
 #'
 #' @export
-nettoyer_numero_telephone <- function(numero) {
+str_clean_phone_number <- function(phone_number) {
 
-  numero <- stringr::str_replace_all(numero, "\n", " ")
+  cleaned_phone_number <- stringr::str_replace_all(phone_number, "\n", " ")
 
-  numero2 <- stringr::str_remove_all(numero, "[^\\d]") %>%
+  cleaned_phone_number <- stringr::str_remove_all(phone_number, "[^\\d]") %>%
     stringr::str_replace_all("^(00)?330?(\\d{9})", "0\\2") %>%
     { ifelse(nchar(.) == 9, paste0("0", .), .) } %>%
-    { ifelse(nchar(.) == 10, stringr::str_replace(., "(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "\\1 \\2 \\3 \\4 \\5"), numero) }
+    { ifelse(nchar(.) == 10, stringr::str_replace(., "(\\d{2})(\\d{2})(\\d{2})(\\d{2})(\\d{2})", "\\1 \\2 \\3 \\4 \\5"), phone_number) }
 
-  return(numero2)
+  return(cleaned_phone_number)
 }
 
 #' Valider des emails par regex
