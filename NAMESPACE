@@ -2,7 +2,7 @@
 
 export("%>%")
 export(conv_nombre_toutes_lettres)
-export(generer_data)
+export(generate_data)
 export(maj_casse)
 export(nettoyer_numero_telephone)
 export(prx_mots_vides)

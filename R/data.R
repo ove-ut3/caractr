@@ -1,8 +1,8 @@
-#' data
+#' Generate data
 #'
 #' @export
 #' @keywords internal
-generer_data <- function() {
+generate_data <- function() {
 
   mots_vides <- impexp::access_importer("mots_vides", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
   save("mots_vides", file = paste0(racine_packages, "caractr/data/mots_vides.RData"))
