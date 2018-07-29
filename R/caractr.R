@@ -110,56 +110,6 @@ str_normalise <- function(string){
   return(normalised_string)
 }
 
-#' Open data - Convertir les NA d'une chaine de caracteres vers une chaine vide
-#'
-#' Convertir les \code{NA} d'une chaine de caractères vers une chaine vide.\cr
-#'
-#' Utilisé conjointement avec la fonction \code{conv_pv_vide()} pour créer les champs multivalués vides des fichiers en open data.
-#'
-#' @param libelle Un vecteur de type caractère.
-#'
-#' @return Un vecteur de type caractère dont les \code{NA} sont transformés en \code{""}.
-#'
-#' @examples
-#' caractr::conv_ods_na_vide(c("Université de Franche-Comté", NA_character_))
-#'
-#' @export
-conv_ods_na_vide <- function(libelle){
-
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
-  }
-
-  conv_na_vide <- ifelse(is.na(libelle), "", libelle)
-
-  return(conv_na_vide)
-}
-
-#' Open data - Convertir les points-virgules seuls vers NA
-#'
-#' Convertir les points-virgules seuls vers \code{NA}.\cr
-#'
-#' Utilisé conjointement avec la fonction \code{conv_na_vide()} pour créer les champs multivalués vides des fichiers en open data.
-#'
-#' @param libelle Un vecteur de type caractère.
-#'
-#' @return Un vecteur de type caractère dont les points-virgule seuls sont transformés en \code{NA}.
-#'
-#' @examples
-#' conv_ods_pv_na(c(";;;", ";CNRS;;"))
-#'
-#' @export
-conv_ods_pv_na <- function(libelle){
-
-  if (class(libelle) != "character") {
-    stop("Le paramètre doit être de type character", call. = FALSE)
-  }
-
-  conv_pv_vide <- ifelse(stringr::str_detect(libelle, "^;+$"), NA_character_, libelle)
-
-  return(conv_pv_vide)
-}
-
 #' Derive de la fonction paste() avec un parametre de suppression des NA
 #'
 #' Dérivé de la fonction \code{paste()} avec un paramètre de suppression des \code{NA}.\cr
@@ -296,7 +246,6 @@ appliquer_casse <- function(libelle, libelle_casse) {
     dplyr::ungroup() %>%
     dplyr::right_join(dplyr::tibble(num_libelle = 1:length(libelle)),
                      by = "num_libelle") %>%
-    dplyr::mutate(libelle = caractr::conv_ods_na_vide(libelle)) %>%
     dplyr::pull(libelle)
 
   return(appliquer_casse)
