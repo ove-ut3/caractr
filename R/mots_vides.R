@@ -1,47 +1,46 @@
-#' Obtenir la liste des mots vides (fr ou en) sous forme d'expression reguliere
+#' Get a list of stop words as a regular expression.
 #'
-#' Obtenir la liste des mots vides (fr ou en) sous forme d'expression régulière.
+#' @param language Stop word language.
+#' @param drop Stop words to drop.
+#' @param keep Stop words to keep.
 #'
-#' @param langue Code de la langue des mots vides.
-#' @param excepte Vecteur de mots-vides à ne pas sélectionner.
-#' @param selection Vecteur de mots-vides à sélectionner.
+#' @return A regular expression as string character.
 #'
-#' @return Une expression régulière sous forme de chaine de caractères.\cr
-#'
-#' Jeu de données source : \code{caractr::mots_vides}.\cr
-#' Il est créé à partir de la table "Mot_vide" de la base Access "Tables_ref.accdb" (projet "Text mining").
+#' @details
+#' Source dataset : \code{caractr::stopwords}.
 #'
 #' @examples
-#' # Les mots vides français
-#' caractr::prx_mots_vides()
+#' # French stopwords
+#' caractr::prx_stopwords()
 #'
-#' # Les mots vides français sauf les mots "au" et "aux"
-#' caractr::prx_mots_vides(excepte = c("au", "aux"))
+#' # French stopwords except "au" and "aux"
+#' caractr::prx_stopwords(drop = c("au", "aux"))
 #'
-#' # Les mots vides français "au" et "aux"
-#' caractr::prx_mots_vides(selection = c("au", "aux"))
+#' # French stopwords but only "au" and "aux"
+#' caractr::prx_stopwords(keep = c("au", "aux"))
 #'
-#' # Les mots vides anglais
-#' caractr::prx_mots_vides(langue = "en")
+#' # English stopwords
+#' caractr::prx_stopwords(language = "en")
 #'
 #' @export
-prx_mots_vides <- function(langue = "fr", excepte = NULL, selection = NULL){
+#' @keywords internal
+prx_stopwords <- function(language = "fr", drop = NULL, keep = NULL){
 
-  prx_mots_vides <- dplyr::filter(caractr::mots_vides, code_langue == langue) %>%
-    dplyr::pull(mot_vide)
+  stopwords <- dplyr::filter(caractr::stopwords, language == !!language) %>%
+    dplyr::pull(stopword)
 
-  if (!is.null(excepte)) {
-    prx_mots_vides <- setdiff(prx_mots_vides, excepte)
+  if (!is.null(drop)) {
+    stopwords <- setdiff(stopwords, drop)
   }
 
-  if (!is.null(selection)) {
-    prx_mots_vides <- intersect(prx_mots_vides, selection)
+  if (!is.null(keep)) {
+    stopwords <- intersect(stopwords, keep)
   }
 
-  prx_mots_vides <- paste(prx_mots_vides, collapse = "|") %>%
+  stopwords <- paste(stopwords, collapse = "|") %>%
     paste0("\\b(", ., ")\\b")
 
-  return(prx_mots_vides)
+  return(stopwords)
 }
 
 #' Mise a jour de la casse en prenant en compte les mots vides

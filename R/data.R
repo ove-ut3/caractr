@@ -4,8 +4,8 @@
 #' @keywords internal
 generate_data <- function() {
 
-  mots_vides <- impexp::access_importer("mots_vides", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
-  save("mots_vides", file = paste0(racine_packages, "caractr/data/mots_vides.RData"))
+  stopwords <- impexp::access_importer("stopwords", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
+  save("stopwords", file = paste0(racine_packages, "caractr/data/stopwords.RData"))
 
   mots_lettres <- impexp::access_importer("mots_lettres", paste0(racine_packages, "caractr/raw/Tables_ref.accdb")) %>%
     dplyr::mutate(lettre_f = ifelse(lettre == "un", "une", lettre),
