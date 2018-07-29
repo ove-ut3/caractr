@@ -4,13 +4,13 @@
 \alias{str_conv_number_letter}
 \title{Convert a numeric vector to full letters.}
 \usage{
-str_conv_number_letter(x, type = "lettre", female = FALSE,
+str_conv_number_letter(x, type = "letter", female = FALSE,
   language = "fr")
 }
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{type}{Choice between : lettre|ieme|ieme_chiffre}
+\item{type}{Choice between : letter|ieme|ieme_number}
 
 \item{female}{If \code{TRUE}, female form.}
 
