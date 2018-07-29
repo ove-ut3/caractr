@@ -110,25 +110,23 @@ str_normalise <- function(string){
   return(normalised_string)
 }
 
-#' Derive de la fonction paste() avec un parametre de suppression des NA
+#' Equivalent to base paste but with an extra na.rm parameter
 #'
-#' Dérivé de la fonction \code{paste()} avec un paramètre de suppression des \code{NA}.\cr
+#' Found on : \url{http://stackoverflow.com/questions/13673894/suppress-nas-in-paste}
 #'
-#' Trouvé sur : \url{http://stackoverflow.com/questions/13673894/suppress-nas-in-paste}
+#' @param ... one or more R objects, to be converted to character vectors.
+#' @param sep a character string to separate the terms.
+#' @param collapse an optional character string to separate the results.
+#' @param na.rm logical. Should missing values (including NaN) be removed?
 #'
-#' @param ... Des chaines de caractère à concaténer.
-#'
-#' @return Une chaine de caractère concaténée sans \code{NA}.
+#' @return A character vector of the concatenated values.
 #'
 #' @examples
-#' # Avec la fonction paste() classique
 #' paste("chaine1", NA_character_, "chaine2")
-#'
-#' # Avec la fonction paste2()
-#' caractr::paste2("chaine1", NA_character_, "chaine2")
+#' caractr::str_paste("chaine1", NA_character_, "chaine2")
 #'
 #' @export
-paste2 <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
+str_paste <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
 
   if (any(purrr::map_lgl(list(...), ~ length(.) == 0))) {
     return(character(0))
