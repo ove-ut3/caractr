@@ -1,5 +1,5 @@
 Package: caractr
-Title: Some additional functions to deal with character vectors.
+Title: Additional functions to deal with character vectors.
 Version: 0.1
 Authors@R: person("Stéphane Le Hénanff", "Stéphane Le Hénanff", email = "github@le-henanff.fr", role = c("aut", "cre"))
 Description: caractr provides a few functions in addition of those within stringr package. Its name corresponds to the simplified French translation of character because some of the functions deal with French characters.
