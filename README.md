@@ -1,4 +1,4 @@
-# caractr : some additional functions to deal with character vectors
+# caractr : additional functions to deal with character vectors
 
 **caractr** provides a few functions in addition of those within **stringr** package.
 
