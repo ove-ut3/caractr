@@ -69,17 +69,17 @@ str_capitalise <- function(string){
   return(sub("^([[:alpha:]])", "\\U\\1\\E", string, perl = TRUE))
 }
 
-#' Normalise a string for a use as table column name.
+#' Normalise a string for a use as table column names.
 #'
 #' @param string Input character vector.
 #'
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_normalise_colname(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
+#' caractr::str_normalise_colnames(c("Type d'unité Sirus : entreprise profilée ou unité légale", "Nic du siège"))
 #'
 #' @export
-str_normalise_colname <- function(string){
+str_normalise_colnames <- function(string){
 
   if (class(string) != "character") {
     stop("Input vector must be a character vector", call. = FALSE)
