@@ -4,10 +4,10 @@
 #' @keywords internal
 generate_data <- function() {
 
-  stopwords <- impexp::access_import("stopwords", paste0(racine_packages, "caractr/raw/Tables_ref.accdb"))
+  stopwords <- impexp::access_import("stopwords", paste0(find.package("caractr"), "/extdata/Tables_ref.accdb"))
   save("stopwords", file = paste0(racine_packages, "caractr/data/stopwords.RData"))
 
-  number_letter <- impexp::access_import("number_letter", paste0(racine_packages, "caractr/raw/Tables_ref.accdb")) %>%
+  number_letter <- impexp::access_import("number_letter", paste0(find.package("caractr"), "/extdata/Tables_ref.accdb")) %>%
     dplyr::mutate(letter_f = ifelse(letter == "un", "une", letter),
                   ieme = paste0(letter, "ième"),
                   ieme = ifelse(x == 0, NA_character_, ieme),
