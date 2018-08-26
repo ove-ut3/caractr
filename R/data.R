@@ -1,6 +1,5 @@
 #' Generate data
 #'
-#' @export
 #' @keywords internal
 generate_data <- function() {
 

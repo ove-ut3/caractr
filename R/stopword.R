@@ -22,7 +22,6 @@
 #' # English stopwords
 #' caractr::prx_stopwords(language = "en")
 #'
-#' @export
 #' @keywords internal
 prx_stopwords <- function(language = "fr", drop = NULL, keep = NULL){
 
