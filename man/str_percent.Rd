@@ -4,7 +4,7 @@
 \alias{str_percent}
 \title{Conversion from a numeric percentage to a character label.}
 \usage{
-str_percent(x, digits = 1, symbol = TRUE)
+str_percent(x, digits = 1, symbol = TRUE, sign = FALSE)
 }
 \arguments{
 \item{x}{A numeric vector.}
@@ -12,6 +12,8 @@ str_percent(x, digits = 1, symbol = TRUE)
 \item{digits}{Integer indicating the number of decimal places.}
 
 \item{symbol}{Display of "\%".}
+
+\item{sign}{Display of "+" and "-".}
 }
 \value{
 A character vector.

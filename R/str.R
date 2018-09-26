@@ -266,6 +266,7 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
 #' @param x A numeric vector.
 #' @param digits Integer indicating the number of decimal places.
 #' @param symbol Display of "\%".
+#' @param sign Display of "+" and "-".
 #'
 #' @return A character vector.
 #'
@@ -273,15 +274,20 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
 #' caractr::str_percent(0.1)
 #'
 #' @export
-str_percent <- function(x, digits = 1, symbol = TRUE) {
+str_percent <- function(x, digits = 1, symbol = TRUE, sign = FALSE) {
 
-  percent <- round(x * 100, digits) %>%
-    stringr::str_replace("\\.", ",")
+  percent <- round(x * 100, digits)
+
+  if (sign == TRUE) {
+    percent <- stringr::str_c(ifelse(percent > 0, "+", ""), percent)
+  }
 
   if (symbol == TRUE) {
     percent <- stringr::str_c(percent, "%", sep = "\U202F")
 
   }
+
+  percent <- stringr::str_replace(percent, "\\.", ",")
 
   return(percent)
 }
