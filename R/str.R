@@ -423,7 +423,9 @@ str_age_litteral <- function(age) {
     mois >= 1 ~ "mois",
     TRUE ~ NA_character_
   ) %>%
-    caractr::str_paste(mois, .)
+    caractr::str_paste(mois, .) %>%
+    dplyr::na_if("0") %>%
+    stringr::str_c(" et ", .)
 
   annee <- floor(age)
 
@@ -434,7 +436,7 @@ str_age_litteral <- function(age) {
   ) %>%
     caractr::str_paste(annee, .)
 
-  str_age_litteral <- caractr::str_paste(annee, mois, sep = " et ")
+  str_age_litteral <- caractr::str_paste(annee, mois)
 
   return(str_age_litteral)
 }
