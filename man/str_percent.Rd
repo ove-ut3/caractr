@@ -4,14 +4,14 @@
 \alias{str_percent}
 \title{Conversion from a numeric percentage to a character label.}
 \usage{
-str_percent(x, digits = 1, symbol = TRUE, sign = FALSE)
+str_percent(x, digits = 1, suffix = "<U+202F>\%", sign = FALSE)
 }
 \arguments{
 \item{x}{A numeric vector.}
 
 \item{digits}{Integer indicating the number of decimal places.}
 
-\item{symbol}{Display of "\%".}
+\item{suffix}{Suffix after the percent value.}
 
 \item{sign}{Display of "+" and "-".}
 }
