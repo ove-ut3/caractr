@@ -291,6 +291,22 @@ str_percent <- function(x, digits = 1, suffix = "\U202F%", sign = FALSE) {
   return(percent)
 }
 
+#' Conversion from a numeric to a character with thousands separated by a non-breaking space.
+#'
+#' @param x A numeric vector.
+#'
+#' @return A character vector.
+#'
+#' @examples
+#' caractr::str_percent(1854)
+#'
+#' @export
+str_thousands <- function(x) {
+
+  `Encoding<-`(gsub(",", "\U202F", format(x, big.mark = ",")), "UTF-8")
+
+}
+
 #' Cut a character string over multiple lines
 #'
 #' @param string Input character vector.
