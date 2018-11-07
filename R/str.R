@@ -291,19 +291,21 @@ str_percent <- function(x, digits = 1, suffix = "\U202F%", sign = FALSE) {
   return(percent)
 }
 
-#' Conversion from a numeric to a character with thousands separated by a non-breaking space.
+#' Conversion from a numeric to a French formed number.
+#'
+#' Includes comma as decimal mark and non-breaking space between thousands.
 #'
 #' @param x A numeric vector.
 #'
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_percent(1854)
+#' caractr::str_pretty_num(1854.2)
 #'
 #' @export
-str_thousands <- function(x) {
+str_pretty_num <- function(x) {
 
-  `Encoding<-`(gsub(",", "\U202F", format(x, big.mark = ",")), "UTF-8")
+  `Encoding<-`(gsub("-", "\U202F", format(x, decimal.mark = ",", big.mark = "-")), "UTF-8")
 
 }
 
