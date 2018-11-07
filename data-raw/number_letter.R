@@ -11,4 +11,4 @@ number_letter <- readr::read_csv2("data-raw/number_letter.csv", col_types = read
                 ieme_number = ifelse(x == 0, NA_character_, ieme_number),
                 ieme_number_f = ifelse(x == 1, "1ère", ieme_number))
 
-devtools::use_data(number_letter, overwrite = TRUE)
+usethis::use_data(number_letter, overwrite = TRUE)
