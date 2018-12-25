@@ -13,7 +13,7 @@
 str_conv_number_letter <- function(x, type = "letter", female = FALSE, language = "fr") {
 
   if (female) {
-    type <- paste0(type, "_f")
+    type <- glue::glue("{type}_f")
   }
 
   letter <- dplyr::tibble(x) %>%
