@@ -13,5 +13,7 @@ RoxygenNote: 6.1.1
 Imports:
     dplyr,
     purrr,
+    readr,
     stringr,
-    tidyr
+    tidyr,
+    usethis
