@@ -107,6 +107,10 @@ str_normalise_colnames <- function(string){
     # All accents are removed
     caractr::str_remove_accent()
 
+  # If duplicate, make unique
+  if(length(normalised_string) != length(unique(normalised_string))) {
+    normalised_string <- make.unique(normalised_string, sep = "_")
+  }
   return(normalised_string)
 }
 
@@ -371,27 +375,6 @@ str_camel_to_snake_case <- function(string) {
 str_quote <- function(string) {
 
   return(stringr::str_replace_all(string, "’", "'"))
-}
-
-#' Replace Empty character with NA.
-#'
-#' @param string Input character vector.
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' caractr::str_empty_to_na(c("a", "", "c"))
-#'
-#' @export
-str_empty_to_na <- function(string) {
-
-  if (class(string) != "character") {
-    stop("Input vector must be a character vector", call. = FALSE)
-  }
-
-  is.na(string) <- string == ''
-
-  return(string)
 }
 
 #' Get today date in several formats.
