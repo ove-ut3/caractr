@@ -16,17 +16,11 @@ str_remove_accent <- function(string) {
     stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  no_accents <- iconv(string, from = "UTF-8", to = "ASCII//TRANSLIT")
+  string[which(Encoding(string) == "UTF-8")] <- iconv(string[which(Encoding(string) == "UTF-8")], from = "UTF-8", to = "ASCII//TRANSLIT")
 
-  # If iconv from UT8 did not work, iconv from Windows-1252
-  position_na_utf8 <- which(is.na(no_accents) & !is.na(string))
-  if (length(position_na_utf8) >= 1) {
-    no_accents[position_na_utf8] <- iconv(string[position_na_utf8],
-                                          from = "Windows-1252",
-                                          to = "ASCII//TRANSLIT")
-  }
+  string <- iconv(string, to = "ASCII//TRANSLIT")
 
-  return(no_accents)
+  return(string)
 }
 
 #' Remove punctuation in a string.
