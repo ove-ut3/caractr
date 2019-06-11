@@ -249,6 +249,7 @@ str_percent <- function(x, digits = 1, suffix = "\U202F%", sign = FALSE) {
 #' Includes comma as decimal mark and non-breaking space between thousands.
 #'
 #' @param x A numeric vector.
+#' @param big.mark Thousands separator, non-breaking space by default.
 #'
 #' @return A character vector.
 #'
@@ -256,9 +257,9 @@ str_percent <- function(x, digits = 1, suffix = "\U202F%", sign = FALSE) {
 #' caractr::str_pretty_num(1854.2)
 #'
 #' @export
-str_pretty_num <- function(x) {
+str_pretty_num <- function(x, big.mark = "\U202F") {
 
-  `Encoding<-`(gsub("-", "\U202F", format(x, decimal.mark = ",", big.mark = "-")), "UTF-8")
+  `Encoding<-`(gsub("-", big.mark, format(x, decimal.mark = ",", big.mark = "-")), "UTF-8")
 
 }
 

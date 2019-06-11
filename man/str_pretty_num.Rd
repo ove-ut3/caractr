@@ -4,10 +4,12 @@
 \alias{str_pretty_num}
 \title{Conversion from a numeric to a French formed number.}
 \usage{
-str_pretty_num(x)
+str_pretty_num(x, big.mark = "<U+202F>")
 }
 \arguments{
 \item{x}{A numeric vector.}
+
+\item{big.mark}{Thousands separator, non-breaking space by default.}
 }
 \value{
 A character vector.
