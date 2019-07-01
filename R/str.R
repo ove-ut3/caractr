@@ -227,7 +227,7 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
 #' caractr::str_percent(0.1)
 #'
 #' @export
-str_percent <- function(x, digits = 1, suffix = "\U202F%", sign = FALSE) {
+str_percent <- function(x, digits = 0, suffix = "\U202F%", sign = FALSE) {
 
   percent <- round(x * 100, digits)
 

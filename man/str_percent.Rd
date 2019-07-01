@@ -4,7 +4,7 @@
 \alias{str_percent}
 \title{Conversion from a numeric percentage to a character label.}
 \usage{
-str_percent(x, digits = 1, suffix = "<U+202F>\%", sign = FALSE)
+str_percent(x, digits = 0, suffix = "<U+202F>\%", sign = FALSE)
 }
 \arguments{
 \item{x}{A numeric vector.}
