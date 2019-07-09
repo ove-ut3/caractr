@@ -214,55 +214,6 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
   return(normalised_string)
 }
 
-#' Conversion from a numeric percentage to a character label.
-#'
-#' @param x A numeric vector.
-#' @param digits Integer indicating the number of decimal places.
-#' @param suffix Suffix after the percent value.
-#' @param sign Display of "+" and "-".
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' caractr::str_percent(0.1)
-#'
-#' @export
-str_percent <- function(x, digits = 0, suffix = "<U+202F>%", sign = FALSE) {
-
-  percent <- round(x * 100, digits)
-
-  if (sign == TRUE) {
-    percent <- stringr::str_c(ifelse(percent > 0, "+", ""), percent)
-  }
-
-  if (!is.null(suffix)) {
-    percent <- stringr::str_c(percent, suffix, sep = "")
-  }
-
-  percent <- stringr::str_replace(percent, "\\.", ",")
-
-  return(percent)
-}
-
-#' Conversion from a numeric to a French formed number.
-#'
-#' Includes comma as decimal mark and non-breaking space between thousands.
-#'
-#' @param x A numeric vector.
-#' @param big.mark Thousands separator, non-breaking space by default.
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' caractr::str_pretty_num(1854.2)
-#'
-#' @export
-str_pretty_num <- function(x, big.mark = "<U+202F>") {
-
-  `Encoding<-`(gsub("-", big.mark, format(x, decimal.mark = ",", big.mark = "-")), "UTF-8")
-
-}
-
 #' Cut a character string over multiple lines
 #'
 #' @param string Input character vector.
