@@ -15,7 +15,7 @@ caractr::str_paste("chaine1", NA_character_, "chaine2")
 # Remove (French) accents in a string
 caractr::str_remove_accent("Université de Franche-Comté")
 
-# Convert a numeric percentage to character with the non-breaking space
-caractr::str_percent(0.111, digits = 1)
+# Converts from a numeric percentage to a French formatted label.
+caractr::str_percent_fr(0.111, digits = 1)
 
 ```
