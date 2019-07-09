@@ -272,7 +272,8 @@ str_pretty_num <- function(x, big.mark = "<U+202F>") {
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_line_break(c("A very very very very very very character string", "test"), nchar_max = 40)
+#' caractr::str_line_break(c("A very very very very very very long character string", "test"),
+#'  nchar_max = 40)
 #'
 #' @export
 str_line_break <- function(string, nchar_max, collapse = "\n") {
