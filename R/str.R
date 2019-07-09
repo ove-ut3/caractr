@@ -106,41 +106,6 @@ str_paste <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
   }
 }
 
-#' Add French accents to a string.
-#'
-#' @param string Input character vector.
-#'
-#' @return A character vector.
-#'
-#' Source dataset : \code{caractr::word_fr_accent}.\cr
-#'
-#' @examples
-#' caractr::str_add_fr_accent("Ecole superieure de commerce de Troyes")
-#' caractr::str_add_fr_accent("Universite de Franche-Comte")
-#'
-#' @export
-str_add_fr_accent <- function(string) {
-
-  if (class(string) != "character") {
-    stop("Input vector must be a character vector", call. = FALSE)
-  }
-
-  with_accent <- dplyr::tibble(string) %>%
-    dplyr::mutate(cle = dplyr::row_number(),
-                  word = string) %>%
-    tidyr::separate_rows(.data$word, sep = "\\b") %>%
-    dplyr::mutate(word_lc = tolower(.data$word)) %>%
-    dplyr::left_join(caractr::word_fr_accent, by = c("word_lc" = "word")) %>%
-    dplyr::mutate(word_fr_accent = ifelse(!is.na(.data$word_fr_accent), .data$word_fr_accent, .data$word_lc),
-                  word_fr_accent = caractr::str_apply_case(.data$word_fr_accent, .data$word)) %>%
-    dplyr::group_by(.data$cle, string) %>%
-    dplyr::summarise(string_accent = caractr::str_paste(.data$word_fr_accent, collapse = "")) %>%
-    dplyr::ungroup() %>%
-    dplyr::pull(.data$string_accent)
-
-  return(with_accent)
-}
-
 #' Apply case from a target character to another string.
 #'
 #' @param string Input character vector.
