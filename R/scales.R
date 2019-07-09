@@ -20,7 +20,7 @@ str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = TRUE) {
   }
 
   if (suffix == TRUE) {
-    percent <- stringr::str_c(percent, "\u202F", sep = "")
+    percent <- stringr::str_c(percent, "\u202F%", sep = "")
   }
 
   percent <- stringr::str_replace(percent, "\\.", ",")
