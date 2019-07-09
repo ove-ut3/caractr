@@ -23,14 +23,18 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
     stop("Input vector must be a character vector", call. = FALSE)
   }
 
-  prx_mots_vides <- prx_mots_vides(language)
+  prx_stopwords <- caractr::stopwords %>%
+    dplyr::filter(language == !!language) %>%
+    dplyr::pull() %>%
+    paste0(collapse = "|") %>%
+    { paste0("^(", ., ")$") }
 
   str_add_case <- dplyr::tibble(mot = string) %>%
     dplyr::mutate(cle = dplyr::row_number()) %>%
     tidyr::separate_rows(mot, sep = " ") %>%
     dplyr::mutate(
       # If the word is a stop word -> lower case
-      mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(mot, "[[:punct:]]"), stringr::regex(prx_mots_vides, ignore_case = TRUE)) & dplyr::row_number() != 1,
+      mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(mot, "[[:punct:]]"), stringr::regex(prx_stopwords, ignore_case = TRUE)) & dplyr::row_number() != 1,
                                      tolower(mot), NA_character_),
       # If the word is the drop list -> lower case
       mot_casse = ifelse(is.na(mot_casse) & mot %in% drop, mot, mot_casse),
@@ -40,7 +44,7 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
       mot_casse = sub("(D|L)'([[:alpha:]])", "\\L\\1\\E'\\U\\2\\E", mot_casse, perl = TRUE)
       ) %>%
     dplyr::group_by(cle) %>%
-    dplyr::summarise(string = paste2(mot_casse, collapse = " ")) %>%
+    dplyr::summarise(string = caractr::str_paste(mot_casse, collapse = " ")) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(string = stringr::str_replace_all(string, "\\b(d|l)\\s", "\\1'")) %>%
     dplyr::pull(string)
