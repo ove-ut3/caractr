@@ -6,7 +6,7 @@ Description: caractr provides a few functions in addition of those within string
     Its name corresponds to the simplified French translation of character because some of the functions deal with French characters.
 Depends:
     R (>= 3.2.5)
-License: Etalab
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
