@@ -18,7 +18,7 @@ A character vector.
 Remove punctuation in a string.
 }
 \examples{
-caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne")
-caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne", replacement = "_")
+caractr::str_remove_punct("Universit\\u00E9 Paris-Est Cr\\u00E9teil Val-de-Marne")
+caractr::str_remove_punct("Universit\\u00E9 Paris-Est Cr\\u00E9teil Val-de-Marne", replacement = "_")
 
 }

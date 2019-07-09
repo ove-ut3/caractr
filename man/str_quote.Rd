@@ -16,6 +16,6 @@ A character vector.
 Replace Windows quote by the ASCII quote
 }
 \examples{
-caractr::str_quote("Un emploi qui n’a pas de lien avec vos études")
+caractr::str_quote("Un emploi qui n\\uE28099a pas de lien avec vos \\u00E9tudes")
 
 }

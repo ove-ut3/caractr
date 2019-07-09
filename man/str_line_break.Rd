@@ -20,6 +20,6 @@ A character vector.
 Cut a character string over multiple lines
 }
 \examples{
-caractr::str_line_break(c("Une très très très très très très longue chaine de caractère", "test"), nchar_max = 40)
+caractr::str_line_break(c("A very very very very very very character string", "test"), nchar_max = 40)
 
 }

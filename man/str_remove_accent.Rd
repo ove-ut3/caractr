@@ -16,6 +16,6 @@ A character vector.
 Found on : \url{http://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding}
 }
 \examples{
-caractr::str_remove_accent("Université de Franche-Comté")
+caractr::str_remove_accent("Universit\\u00E9 de Franche-Comt\\u00E9")
 
 }

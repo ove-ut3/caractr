@@ -7,7 +7,7 @@
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_remove_accent("Université de Franche-Comté")
+#' caractr::str_remove_accent("Universit\u00E9 de Franche-Comt\u00E9")
 #'
 #' @export
 str_remove_accent <- function(string) {
@@ -31,8 +31,8 @@ str_remove_accent <- function(string) {
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne")
-#' caractr::str_remove_punct("Université Paris-Est Créteil Val-de-Marne", replacement = "_")
+#' caractr::str_remove_punct("Universit\u00E9 Paris-Est Cr\u00E9teil Val-de-Marne")
+#' caractr::str_remove_punct("Universit\u00E9 Paris-Est Cr\u00E9teil Val-de-Marne", replacement = "_")
 #'
 #' @export
 str_remove_punct <- function(string, replacement = " "){
@@ -51,7 +51,7 @@ str_remove_punct <- function(string, replacement = " "){
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_capitalise("université de Caen Normandie")
+#' caractr::str_capitalise("universit\u00E9 de Caen Normandie")
 #'
 #' @export
 str_capitalise <- function(string){
@@ -227,7 +227,7 @@ str_normalise_file <- function(string, replace_slash = TRUE) {
 #' caractr::str_percent(0.1)
 #'
 #' @export
-str_percent <- function(x, digits = 0, suffix = "\U202F%", sign = FALSE) {
+str_percent <- function(x, digits = 0, suffix = "<U+202F>%", sign = FALSE) {
 
   percent <- round(x * 100, digits)
 
@@ -257,7 +257,7 @@ str_percent <- function(x, digits = 0, suffix = "\U202F%", sign = FALSE) {
 #' caractr::str_pretty_num(1854.2)
 #'
 #' @export
-str_pretty_num <- function(x, big.mark = "\U202F") {
+str_pretty_num <- function(x, big.mark = "<U+202F>") {
 
   `Encoding<-`(gsub("-", big.mark, format(x, decimal.mark = ",", big.mark = "-")), "UTF-8")
 
@@ -272,7 +272,7 @@ str_pretty_num <- function(x, big.mark = "\U202F") {
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_line_break(c("Une très très très très très très longue chaine de caractère", "test"), nchar_max = 40)
+#' caractr::str_line_break(c("A very very very very very very character string", "test"), nchar_max = 40)
 #'
 #' @export
 str_line_break <- function(string, nchar_max, collapse = "\n") {
@@ -319,12 +319,12 @@ str_camel_to_snake_case <- function(string) {
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_quote("Un emploi qui n’a pas de lien avec vos études")
+#' caractr::str_quote("Un emploi qui n\uE28099a pas de lien avec vos \u00E9tudes")
 #'
 #' @export
 str_quote <- function(string) {
 
-  return(stringr::str_replace_all(string, "’", "'"))
+  return(stringr::str_replace_all(string, "\uE28099", "'"))
 }
 
 #' Get today date in several formats.
