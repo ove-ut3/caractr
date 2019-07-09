@@ -25,26 +25,26 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
 
   prx_stopwords <- caractr::stopwords %>%
     dplyr::filter(language == !!language) %>%
-    dplyr::pull(stopword) %>%
+    dplyr::pull(.data$stopword) %>%
     paste0(collapse = "|") %>%
     { paste0("^(", ., ")$") }
 
   str_add_case <- dplyr::tibble(mot = string) %>%
     dplyr::mutate(cle = dplyr::row_number()) %>%
-    tidyr::separate_rows(mot, sep = " ") %>%
+    tidyr::separate_rows(.data$mot, sep = " ") %>%
     dplyr::mutate(
       # If the word is a stop word -> lower case
-      mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(mot, "[[:punct:]]"), stringr::regex(prx_stopwords, ignore_case = TRUE)) & dplyr::row_number() != 1,
-                                     tolower(mot), NA_character_),
+      mot_casse = ifelse(stringr::str_detect(stringr::str_remove_all(.data$mot, "[[:punct:]]"), stringr::regex(prx_stopwords, ignore_case = TRUE)) & dplyr::row_number() != 1,
+                                     tolower(.data$mot), NA_character_),
       # If the word is the drop list -> lower case
-      mot_casse = ifelse(is.na(mot_casse) & mot %in% drop, mot, mot_casse),
+      mot_casse = ifelse(is.na(.data$mot_casse) & .data$mot %in% drop, .data$mot, .data$mot_casse),
       # In other case, stringr::str_to_title
-      mot_casse = ifelse(is.na(mot_casse), purrr::map_chr(mot, stringr::str_to_title), mot_casse),
+      mot_casse = ifelse(is.na(.data$mot_casse), purrr::map_chr(.data$mot, stringr::str_to_title), .data$mot_casse),
       # Final update with words preceding quotes: " D'argonne " becomes " d'Argonne "
-      mot_casse = sub("(D|L)'([[:alpha:]])", "\\L\\1\\E'\\U\\2\\E", mot_casse, perl = TRUE)
+      mot_casse = sub("(D|L)'([[:alpha:]])", "\\L\\1\\E'\\U\\2\\E", .data$mot_casse, perl = TRUE)
       ) %>%
-    dplyr::group_by(cle) %>%
-    dplyr::summarise(string = caractr::str_paste(mot_casse, collapse = " ")) %>%
+    dplyr::group_by(.data$cle) %>%
+    dplyr::summarise(string = caractr::str_paste(.data$mot_casse, collapse = " ")) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(string = stringr::str_replace_all(string, "\\b(d|l)\\s", "\\1'")) %>%
     dplyr::pull(string)

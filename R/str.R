@@ -128,15 +128,15 @@ str_add_fr_accent <- function(string) {
   with_accent <- dplyr::tibble(string) %>%
     dplyr::mutate(cle = dplyr::row_number(),
                   word = string) %>%
-    tidyr::separate_rows(word, sep = "\\b") %>%
-    dplyr::mutate(word_lc = tolower(word)) %>%
+    tidyr::separate_rows(.data$word, sep = "\\b") %>%
+    dplyr::mutate(word_lc = tolower(.data$word)) %>%
     dplyr::left_join(caractr::word_fr_accent, by = c("word_lc" = "word")) %>%
-    dplyr::mutate(word_fr_accent = ifelse(!is.na(word_fr_accent), word_fr_accent, word_lc),
-                  word_fr_accent = caractr::str_apply_case(word_fr_accent, word)) %>%
-    dplyr::group_by(cle, string) %>%
-    dplyr::summarise(string_accent = caractr::str_paste(word_fr_accent, collapse = "")) %>%
+    dplyr::mutate(word_fr_accent = ifelse(!is.na(.data$word_fr_accent), .data$word_fr_accent, .data$word_lc),
+                  word_fr_accent = caractr::str_apply_case(.data$word_fr_accent, .data$word)) %>%
+    dplyr::group_by(.data$cle, string) %>%
+    dplyr::summarise(string_accent = caractr::str_paste(.data$word_fr_accent, collapse = "")) %>%
     dplyr::ungroup() %>%
-    dplyr::pull(string_accent)
+    dplyr::pull(.data$string_accent)
 
   return(with_accent)
 }
@@ -181,7 +181,7 @@ str_apply_case <- function(string, target) {
                                    toupper(string),
                                    string)) %>%
     dplyr::select(-target) %>%
-    dplyr::group_by(id_string) %>%
+    dplyr::group_by(.data$id_string) %>%
     dplyr::summarise(string = paste0(string, collapse = "")) %>%
     dplyr::ungroup() %>%
     dplyr::right_join(dplyr::tibble(id_string = 1:length(string)),
@@ -281,14 +281,14 @@ str_line_break <- function(string, nchar_max, collapse = "\n") {
   str_line_break <- dplyr::tibble(string = string) %>%
     dplyr::mutate(string = stringr::str_split(string, " ")) %>%
     tidyr::unnest(.id = "id") %>%
-    dplyr::group_by(id) %>%
+    dplyr::group_by(.data$id) %>%
     dplyr::mutate(nchar = (nchar(string) + 1) %>%
                     cumsum()) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(ligne = cut(nchar, seq.int(0, max(dplyr::pull(., nchar)) +  nchar_max - max(dplyr::pull(., nchar)) %% nchar_max , by = nchar_max))) %>%
-    dplyr::group_by(id, ligne) %>%
+    dplyr::group_by(.data$id, .data$ligne) %>%
     dplyr::summarise(string = paste(string, collapse = " ")) %>%
-    dplyr::group_by(id) %>%
+    dplyr::group_by(.data$id) %>%
     dplyr::summarise(string = paste(string, collapse = collapse)) %>%
     dplyr::pull(string)
 
