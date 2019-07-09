@@ -2,7 +2,7 @@
 % Please edit documentation in R/scales.R
 \name{str_number_fr}
 \alias{str_number_fr}
-\title{Conversion from a number. to a French formatted number.}
+\title{Conversion from a number to a French formatted number.}
 \usage{
 str_number_fr(x)
 }

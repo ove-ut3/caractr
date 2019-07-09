@@ -28,7 +28,7 @@ str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = "<U+202F>%") {
   return(percent)
 }
 
-#' Conversion from a number. to a French formatted number.
+#' Conversion from a number to a French formatted number.
 #'
 #' Includes comma as decimal mark and non-breaking space between thousands.
 #'
