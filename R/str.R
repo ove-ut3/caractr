@@ -387,7 +387,7 @@ str_age_litteral <- function(age) {
   ) %>%
     caractr::str_paste(annee, .)
 
-  str_age_litteral <- caractr::str_paste(annee, mois)
+  str_age_litteral <- caractr::str_paste(annee, mois, sep = "")
 
   return(str_age_litteral)
 }
