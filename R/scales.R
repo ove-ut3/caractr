@@ -2,8 +2,8 @@
 #'
 #' @param x A numeric vector.
 #' @param digits Integer indicating the number of decimal places.
-#' @param suffix Suffix after the percent value.
 #' @param sign Display of "+" and "-".
+#' @param suffix Suffix after the percent value.
 #'
 #' @return A French formatted label.
 #'
@@ -11,7 +11,7 @@
 #' caractr::str_percent_fr(0.1)
 #'
 #' @export
-str_percent_fr <- function(x, digits = 0, suffix = "<U+202F>%", sign = FALSE) {
+str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = "<U+202F>%") {
 
   percent <- round(x * 100, digits)
 

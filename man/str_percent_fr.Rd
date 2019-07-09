@@ -4,16 +4,16 @@
 \alias{str_percent_fr}
 \title{Conversion from a numeric percentage to a French formatted label.}
 \usage{
-str_percent_fr(x, digits = 0, suffix = "<U+202F>\%", sign = FALSE)
+str_percent_fr(x, digits = 0, sign = FALSE, suffix = "<U+202F>\%")
 }
 \arguments{
 \item{x}{A numeric vector.}
 
 \item{digits}{Integer indicating the number of decimal places.}
 
-\item{suffix}{Suffix after the percent value.}
-
 \item{sign}{Display of "+" and "-".}
+
+\item{suffix}{Suffix after the percent value.}
 }
 \value{
 A French formatted label.
