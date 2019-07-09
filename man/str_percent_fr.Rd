@@ -4,7 +4,7 @@
 \alias{str_percent_fr}
 \title{Conversion from a numeric percentage to a French formatted label.}
 \usage{
-str_percent_fr(x, digits = 0, sign = FALSE, suffix = "<U+202F>\%")
+str_percent_fr(x, digits = 0, sign = FALSE, suffix = TRUE)
 }
 \arguments{
 \item{x}{A numeric vector.}

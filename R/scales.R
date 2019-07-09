@@ -11,7 +11,7 @@
 #' caractr::str_percent_fr(0.1)
 #'
 #' @export
-str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = "<U+202F>%") {
+str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = TRUE) {
 
   percent <- round(x * 100, digits)
 
@@ -19,8 +19,8 @@ str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = "<U+202F>%") {
     percent <- stringr::str_c(ifelse(percent > 0, "+", ""), percent)
   }
 
-  if (!is.null(suffix)) {
-    percent <- stringr::str_c(percent, suffix, sep = "")
+  if (suffix == TRUE) {
+    percent <- stringr::str_c(percent, "\u202F", sep = "")
   }
 
   percent <- stringr::str_replace(percent, "\\.", ",")
