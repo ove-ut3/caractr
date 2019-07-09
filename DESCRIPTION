@@ -18,3 +18,4 @@ Imports:
     stringr,
     tidyr,
     usethis
+    stats

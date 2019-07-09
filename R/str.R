@@ -90,7 +90,7 @@ str_paste <- function(..., sep = " ", collapse = NULL, na.rm = TRUE) {
   } else {
     if (na.rm == TRUE) {
       paste.na <- function(x, sep) {
-        ret <- paste(na.omit(x), collapse = sep)
+        ret <- paste(stats::na.omit(x), collapse = sep)
         is.na(ret) <- ret == ""
         return(ret)
       }
