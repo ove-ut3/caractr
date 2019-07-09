@@ -25,7 +25,7 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
 
   prx_stopwords <- caractr::stopwords %>%
     dplyr::filter(language == !!language) %>%
-    dplyr::pull() %>%
+    dplyr::pull(stopword) %>%
     paste0(collapse = "|") %>%
     { paste0("^(", ., ")$") }
 
