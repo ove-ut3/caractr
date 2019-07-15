@@ -197,32 +197,6 @@ str_replace_win_quote <- function(string) {
 
   return(stringr::str_replace_all(string, "\uE28099", "'"))
 }
-
-#' Get today date in several formats.
-#'
-#' @param format Date format to use : \code{file} or \code{litteral}.
-#'
-#' @return Date of the day.
-#'
-#' @examples
-#' caractr::str_today()
-#' caractr::str_today("litteral")
-#'
-#' @export
-str_today <- function(format = "file") {
-
-  str_today <- switch(format,
-                      file = Sys.Date() %>%
-                        as.character() %>%
-                        stringr::str_replace_all("-", "_"),
-                      litteral = Sys.Date() %>%
-                        format("%d %B %Y") %>%
-                        stringr::str_remove("^0") %>%
-                        stringr::str_replace("^1 ", "1er "))
-
-  return(str_today)
-}
-
 #' Get age in a litteral format.
 #'
 #' @param age A numeric vector of age.

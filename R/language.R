@@ -86,3 +86,28 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
 
   return(str_add_case)
 }
+
+#' Get today French date in several formats.
+#'
+#' @param format Date format to use : \code{file} or \code{litteral}.
+#'
+#' @return Date of the day.
+#'
+#' @examples
+#' caractr::str_today_fr()
+#' caractr::str_today_fr("litteral")
+#'
+#' @export
+str_today_fr <- function(format = "file") {
+
+  str_today_fr <- switch(format,
+                         file = Sys.Date() %>%
+                           as.character() %>%
+                           stringr::str_replace_all("-", "_"),
+                         litteral = Sys.Date() %>%
+                           format("%d %B %Y") %>%
+                           stringr::str_remove("^0") %>%
+                           stringr::str_replace("^1 ", "1er "))
+
+  return(str_today_fr)
+}
