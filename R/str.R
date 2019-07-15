@@ -190,10 +190,10 @@ str_camel_to_snake_case <- function(string) {
 #' @return A character vector.
 #'
 #' @examples
-#' caractr::str_quote("Un emploi qui n\uE28099a pas de lien avec vos \u00E9tudes")
+#' caractr::str_replace_win_quote("Un emploi qui n\uE28099a pas de lien avec vos \u00E9tudes")
 #'
 #' @export
-str_quote <- function(string) {
+str_replace_win_quote <- function(string) {
 
   return(stringr::str_replace_all(string, "\uE28099", "'"))
 }
