@@ -2,7 +2,7 @@
 
 export(str_add_case)
 export(str_add_fr_accent)
-export(str_age_litteral)
+export(str_age_fr)
 export(str_apply_case)
 export(str_camel_to_snake_case)
 export(str_capitalise)

@@ -111,3 +111,42 @@ str_today_fr <- function(format = "file") {
 
   return(str_today_fr)
 }
+
+#' Get age in a French litteral format.
+#'
+#' @param age A numeric vector of age.
+#'
+#' @return A character vector of age in French litteral format.
+#'
+#' @examples
+#' caractr::str_age_fr(25.64048)
+#'
+#' @export
+str_age_fr <- function(age) {
+
+  mois <- age %>%
+    { . - floor(.) } %>%
+    { . * 12 } %>%
+    round()
+
+  mois <- dplyr::case_when(
+    mois >= 1 ~ "mois",
+    TRUE ~ NA_character_
+  ) %>%
+    caractr::str_paste(mois, .) %>%
+    dplyr::na_if("0") %>%
+    stringr::str_c(" et ", .)
+
+  annee <- floor(age)
+
+  annee <- dplyr::case_when(
+    annee == 1 ~ "an",
+    annee >= 2 ~ "ans",
+    TRUE ~ NA_character_
+  ) %>%
+    caractr::str_paste(annee, .)
+
+  str_age_fr <- caractr::str_paste(annee, mois, sep = "")
+
+  return(str_age_fr)
+}
