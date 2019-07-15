@@ -1,28 +1,3 @@
-#' Remove accents in a string.
-#'
-#' Found on : \url{http://stackoverflow.com/questions/20495598/replace-accented-characters-in-r-with-non-accented-counterpart-utf-8-encoding}
-#'
-#' @param string Input character vector.
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' caractr::str_remove_accent("Universit\u00E9 de Franche-Comt\u00E9")
-#'
-#' @export
-str_remove_accent <- function(string) {
-
-  if (class(string) != "character") {
-    stop("Input vector must be a character vector", call. = FALSE)
-  }
-
-  string[which(Encoding(string) == "UTF-8")] <- iconv(string[which(Encoding(string) == "UTF-8")], from = "UTF-8", to = "ASCII//TRANSLIT")
-
-  string <- iconv(string, to = "ASCII//TRANSLIT")
-
-  return(string)
-}
-
 #' Remove punctuation in a string.
 #'
 #' @param string Input character vector.
