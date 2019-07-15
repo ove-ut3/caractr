@@ -1,24 +1,3 @@
-#' Remove punctuation in a string.
-#'
-#' @param string Input character vector.
-#' @param replacement A character vector of replacements.
-#'
-#' @return A character vector.
-#'
-#' @examples
-#' caractr::str_remove_punct("Universit\u00E9 Paris-Est Cr\u00E9teil Val-de-Marne")
-#' caractr::str_remove_punct("Universit\u00E9 Paris-Est Cr\u00E9teil Val-de-Marne", replacement = "_")
-#'
-#' @export
-str_remove_punct <- function(string, replacement = " "){
-
-  if (class(string) != "character") {
-    stop("Input vector must be a character vector", call. = FALSE)
-  }
-
-  return(stringr::str_replace_all(string, "[[:punct:]]+", replacement))
-}
-
 #' Capitalise the first letter in a string.
 #'
 #' @param string Input character vector.
