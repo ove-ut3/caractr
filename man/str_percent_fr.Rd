@@ -9,7 +9,7 @@ str_percent_fr(x, digits = 0, sign = FALSE, suffix = TRUE)
 \arguments{
 \item{x}{A numeric vector.}
 
-\item{digits}{Integer indicating the number of decimal places.}
+\item{digits}{Integer indicating the number of decimal places. Set to NULL to skip round.}
 
 \item{sign}{Display of "+" and "-".}
 

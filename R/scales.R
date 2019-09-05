@@ -1,7 +1,7 @@
 #' Conversion from a numeric percentage to a French formatted label.
 #'
 #' @param x A numeric vector.
-#' @param digits Integer indicating the number of decimal places.
+#' @param digits Integer indicating the number of decimal places. Set to NULL to skip round.
 #' @param sign Display of "+" and "-".
 #' @param suffix Suffix after the percent value.
 #'
@@ -13,7 +13,11 @@
 #' @export
 str_percent_fr <- function(x, digits = 0, sign = FALSE, suffix = TRUE) {
 
-  percent <- round(x * 100, digits)
+  percent <- x * 100
+
+  if (!is.null(digits)) {
+    percent <- round(percent, digits)
+  }
 
   if (sign == TRUE) {
     percent <- stringr::str_c(ifelse(percent > 0, "+", ""), percent)
