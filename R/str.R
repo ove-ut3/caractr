@@ -88,7 +88,7 @@ str_apply_case <- function(string, target) {
   apply_case <- dplyr::tibble(string, target) %>%
     dplyr::mutate(string = stringr::str_split(string, ""),
                   target = stringr::str_split(target, "")) %>%
-    tidyr::unnest(.id = "id_string")
+    tidyr::unnest_legacy(.id = "id_string")
 
   names(apply_case) <- make.unique(names(apply_case))
 
@@ -150,7 +150,7 @@ str_line_break <- function(string, nchar_max, collapse = "\n") {
 
   str_line_break <- dplyr::tibble(string = string) %>%
     dplyr::mutate(string = stringr::str_split(string, " ")) %>%
-    tidyr::unnest(.id = "id") %>%
+    tidyr::unnest_legacy(.id = "id") %>%
     dplyr::group_by(.data$id) %>%
     dplyr::mutate(nchar = (nchar(string) + 1) %>%
                     cumsum()) %>%
