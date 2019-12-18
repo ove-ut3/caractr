@@ -32,8 +32,6 @@ str_clean_phone_number <- function(phone_number) {
 #' @export
 str_validate_email <- function(email) {
 
-  str_validate_email <- email %>%
-    stringr::str_detect(stringr::regex("^[a-z0-9\\._%-]+@[a-z0-9\\.-]+\\.[a-z]{2,4}$", ignore_case = TRUE))
+  stringr::str_detect(email, stringr::regex("^[a-z0-9\\._%-]+@[a-z0-9\\.-]+\\.[a-z]{2,4}$", ignore_case = TRUE))
 
-  return(str_validate_email)
 }
