@@ -15,7 +15,7 @@ Imports:
     glue,
     purrr,
     readr,
-    rlang,
+    stats,
     stringr,
     tidyr,
-    stats
+    utils
