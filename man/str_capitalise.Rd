@@ -16,6 +16,6 @@ A character vector.
 Capitalise the first letter in a string.
 }
 \examples{
-caractr::str_capitalise("universit\\u00E9 de Caen Normandie")
+caractr::str_capitalise("universit\u00E9 de Caen Normandie")
 
 }

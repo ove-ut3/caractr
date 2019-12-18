@@ -4,8 +4,7 @@
 \alias{str_conv_number_letter}
 \title{Convert a numeric vector to full letters.}
 \usage{
-str_conv_number_letter(x, type = "letter", female = FALSE,
-  language = "fr")
+str_conv_number_letter(x, type = "letter", female = FALSE, language = "fr")
 }
 \arguments{
 \item{x}{A numeric vector.}
