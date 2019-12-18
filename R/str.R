@@ -197,3 +197,16 @@ str_replace_win_quote <- function(string) {
 
   return(stringr::str_replace_all(string, "\uE28099", "'"))
 }
+
+#' Validate an URL with a regex.
+#'
+#' @param email An URL vector.
+#'
+#' @return A boolean vector.
+#'
+#' @export
+str_validate_url <- function(url) {
+
+  stringr::str_detect(url, stringr::regex("^(https?:\\/\\/)?([\\dA-z\\.-]+)\\.([A-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?", ignore_case = TRUE))
+
+}
