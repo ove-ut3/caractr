@@ -195,7 +195,11 @@ str_camel_to_snake_case <- function(string) {
 #' @export
 str_replace_win_quote <- function(string) {
 
-  return(stringr::str_replace_all(string, "\uE28099", "'"))
+  str_replace_win_quote <- string %>%
+    stringr::str_replace_all("\uE28099", "'") %>%
+    stringr::str_replace_all("\u92", "'")
+
+  return(str_replace_win_quote)
 }
 
 #' Validate an URL with a regex.
