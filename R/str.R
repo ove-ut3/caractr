@@ -197,7 +197,7 @@ str_replace_win_quote <- function(string) {
 
   str_replace_win_quote <- string %>%
     stringr::str_replace_all("\uE28099", "'") %>%
-    stringr::str_replace_all("\u92", "'")
+    stringr::str_replace_all("\x92", "'")
 
   return(str_replace_win_quote)
 }
