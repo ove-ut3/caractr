@@ -4,15 +4,17 @@
 \name{stopwords}
 \alias{stopwords}
 \title{A list of stop words.}
-\format{A data frame with 145 rows and 2 variables:
-\describe{
-  \item{language}{language code (ISO 639-1)}
-  \item{stopword}{stop word}
-}}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 145 rows and 2 columns.
+}
 \usage{
 stopwords
 }
 \description{
-A list of stop words.
+\preformatted{## Rows: 145
+## Columns: 2
+## $ language <chr> "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", "fr", ...
+## $ stopword <chr> "au", "aux", "avec", "ce", "ces", "dans", "de", "des", "du", "elle", "en", "et...
+}
 }
 \keyword{datasets}

@@ -4,15 +4,17 @@
 \name{word_fr_accent}
 \alias{word_fr_accent}
 \title{A conversion table between non accentued words and accentuated words in French.}
-\format{A data frame with 13696 rows and 2 variables:
-\describe{
-  \item{word}{non accentued word}
-  \item{word_fr_accent}{accentued word}
-}}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 13696 rows and 2 columns.
+}
 \usage{
 word_fr_accent
 }
 \description{
-A conversion table between non accentued words and accentuated words in French.
+\preformatted{## Rows: 13,696
+## Columns: 2
+## $ word           <chr> "10eme", "11eme", "12eme", "13eme", "14eme", "15eme", "16eme", "17eme", ...
+## $ word_fr_accent <chr> "10ème", "11ème", "12ème", "13ème", "14ème", "15ème", "16ème", "17ème", ...
+}
 }
 \keyword{datasets}

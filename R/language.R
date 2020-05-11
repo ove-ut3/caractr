@@ -18,17 +18,21 @@ str_add_fr_accent <- function(string) {
   }
 
   with_accent <- dplyr::tibble(string) %>%
-    dplyr::mutate(cle = dplyr::row_number(),
-                  word = string) %>%
+    dplyr::mutate(
+      .id = dplyr::row_number(),
+      word = .data$string
+    ) %>%
     tidyr::separate_rows(.data$word, sep = "\\b") %>%
     dplyr::mutate(word_lc = tolower(.data$word)) %>%
     dplyr::left_join(caractr::word_fr_accent, by = c("word_lc" = "word")) %>%
-    dplyr::mutate(word_fr_accent = ifelse(!is.na(.data$word_fr_accent), .data$word_fr_accent, .data$word_lc),
-                  word_fr_accent = caractr::str_apply_case(.data$word_fr_accent, .data$word)) %>%
-    dplyr::group_by(.data$cle, string) %>%
-    dplyr::summarise(string_accent = caractr::str_paste(.data$word_fr_accent, collapse = "")) %>%
+    dplyr::mutate(
+      word_fr_accent = ifelse(!is.na(.data$word_fr_accent), .data$word_fr_accent, .data$word_lc),
+      word_fr_accent = caractr::str_apply_case(.data$word_fr_accent, .data$word)
+    ) %>%
+    dplyr::group_by(.data$.id, .data$string) %>%
+    dplyr::summarise_at("word_fr_accent", caractr::str_paste, collapse = "") %>%
     dplyr::ungroup() %>%
-    dplyr::pull(.data$string_accent)
+    dplyr::pull(.data$word_fr_accent)
 
   return(with_accent)
 }
@@ -65,7 +69,7 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
     { paste0("^(", ., ")$") }
 
   str_add_case <- dplyr::tibble(mot = string) %>%
-    dplyr::mutate(cle = dplyr::row_number()) %>%
+    dplyr::mutate(.id = dplyr::row_number()) %>%
     tidyr::separate_rows(.data$mot, sep = " ") %>%
     dplyr::mutate(
       # If the word is a stop word -> lower case
@@ -78,7 +82,7 @@ str_add_case <- function(string, drop = NULL, language = "fr"){
       # Final update with words preceding quotes: " D'argonne " becomes " d'Argonne "
       mot_casse = sub("(D|L)'([[:alpha:]])", "\\L\\1\\E'\\U\\2\\E", .data$mot_casse, perl = TRUE)
     ) %>%
-    dplyr::group_by(.data$cle) %>%
+    dplyr::group_by(.data$.id) %>%
     dplyr::summarise(string = caractr::str_paste(.data$mot_casse, collapse = " ")) %>%
     dplyr::ungroup() %>%
     dplyr::mutate(string = stringr::str_replace_all(string, "\\b(d|l)\\s", "\\1'")) %>%

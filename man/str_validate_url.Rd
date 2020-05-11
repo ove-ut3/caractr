@@ -2,16 +2,16 @@
 % Please edit documentation in R/str.R
 \name{str_validate_url}
 \alias{str_validate_url}
-\title{Validate an URL with a regex.}
+\title{Validate a URL with a regex.}
 \usage{
 str_validate_url(url)
 }
 \arguments{
-\item{email}{An URL vector.}
+\item{url}{A URL vector.}
 }
 \value{
 A boolean vector.
 }
 \description{
-Validate an URL with a regex.
+Validate a URL with a regex.
 }

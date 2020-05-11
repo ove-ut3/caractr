@@ -4,20 +4,22 @@
 \name{number_letter}
 \alias{number_letter}
 \title{A conversion table between numbers and their litteral forms in French.}
-\format{A data frame with 1127 rows and 7 variables:
-\describe{
-  \item{x}{number, as integer}
-  \item{letter}{number in its masculine litteral form}
-  \item{letter_f}{number in its feminine litteral form}
-  \item{ieme}{ordinal number in its masculine litteral form}
-  \item{ieme_f}{ordinal number in its feminine litteral form}
-  \item{ieme_number}{ordinal number in its masculine form}
-  \item{ieme_number_f}{ordinal number in its feminine form}
-}}
+\format{
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 1127 rows and 7 columns.
+}
 \usage{
 number_letter
 }
 \description{
-A conversion table between numbers and their litteral forms in French.
+\preformatted{## Rows: 1,127
+## Columns: 7
+## $ x             <int> 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,...
+## $ letter        <chr> "zéro", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "...
+## $ letter_f      <chr> "zéro", "une", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", ...
+## $ ieme          <chr> NA, "premier", "deuxième", "troisième", "quatrième", "cinquième", "sixièm...
+## $ ieme_f        <chr> NA, "première", "deuxième", "troisième", "quatrième", "cinquième", "sixiè...
+## $ ieme_number   <chr> NA, "1er", "2ème", "3ème", "4ème", "5ème", "6ème", "7ème", "8ème", "9ème"...
+## $ ieme_number_f <chr> NA, "1ère", "2ème", "3ème", "4ème", "5ème", "6ème", "7ème", "8ème", "9ème...
+}
 }
 \keyword{datasets}

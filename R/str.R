@@ -86,26 +86,36 @@ str_apply_case <- function(string, target) {
   }
 
   apply_case <- dplyr::tibble(string, target) %>%
-    dplyr::mutate(string = stringr::str_split(string, ""),
-                  target = stringr::str_split(target, "")) %>%
-    tidyr::unnest_legacy(.id = "id_string")
+    dplyr::mutate(.id = dplyr::row_number()) %>%
+    dplyr::mutate_at("string", stringr::str_split, "") %>%
+    dplyr::mutate_at("target", stringr::str_split, "") %>%
+    tidyr::unnest(c(string, target))
 
   names(apply_case) <- make.unique(names(apply_case))
 
-  apply_case <- dplyr::select(apply_case, -4) %>%
-    dplyr::mutate(string = ifelse(target == tolower(target),
-                                   tolower(string),
-                                   string),
-                  string = ifelse(target == toupper(target),
-                                   toupper(string),
-                                   string)) %>%
-    dplyr::select(-target) %>%
-    dplyr::group_by(.data$id_string) %>%
-    dplyr::summarise(string = paste0(string, collapse = "")) %>%
+  apply_case <- apply_case %>%
+    dplyr::mutate(
+      string = dplyr::if_else(
+        target == tolower(.data$target),
+        tolower(.data$string),
+        .data$string
+      ),
+      string = dplyr::if_else(
+        target == toupper(.data$target),
+        toupper(.data$string),
+        .data$string
+      )
+    ) %>%
+    dplyr::select(-.data$target) %>%
+    dplyr::group_by(.data$.id) %>%
+    dplyr::summarise_at("string", paste0, collapse = "") %>%
     dplyr::ungroup() %>%
-    dplyr::right_join(dplyr::tibble(id_string = 1:length(string)),
-                     by = "id_string") %>%
-    dplyr::pull(string)
+    dplyr::right_join(
+      dplyr::tibble(.id = 1:length(string)),
+      by = ".id"
+    ) %>%
+    dplyr::arrange(.data$.id) %>%
+    dplyr::pull(.data$string)
 
   return(apply_case)
 }
@@ -202,9 +212,9 @@ str_replace_win_quote <- function(string) {
   return(str_replace_win_quote)
 }
 
-#' Validate an URL with a regex.
+#' Validate a URL with a regex.
 #'
-#' @param email An URL vector.
+#' @param url A URL vector.
 #'
 #' @return A boolean vector.
 #'
